@@ -7,6 +7,13 @@
     {{ form_start(form) }}
     {{ form_errors(form) }}
 
-    {{ form_row(form.code) }}
+    <div class="form-group">
+        {{ form_row(form.code, { 'attr': {'class': 'form-control', 'rows' : 10} }) }}
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn-success btn">Send</button>
+    </div>
+
     {{ form_end(form) }}
 {% endblock %}
