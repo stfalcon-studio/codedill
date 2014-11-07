@@ -3,6 +3,7 @@
 namespace Application\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Application\Bundle\CoreBundle\Entity
@@ -39,6 +40,8 @@ class Solution
      * @var string $code Code
      *
      * @ORM\Column(name="code", type="text", nullable=false)
+     *
+     * @Assert\NotBlank()
      */
     private $code;
 
