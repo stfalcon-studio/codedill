@@ -27,7 +27,9 @@
         "sensio/generator-bundle": "~2.3",
         "instaclick/php-code-sniffer": "dev-master@dev",
         "instaclick/symfony2-coding-standard": "dev-remaster@dev",
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "3.7.*",
+        "doctrine/doctrine-fixtures-bundle": "2.2.x-dev",
+        "doctrine/data-fixtures": "1.0.x-dev"
     },
     "scripts": {
         "post-root-package-install": [
