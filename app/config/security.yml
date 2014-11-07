@@ -14,25 +14,20 @@ security:
             pattern: ^/
             oauth:
                 failure_path: /auth/connect
-                login_path: /auth/connect
+                login_path: /auth/connect/github
                 check_path: /auth/connect
                 provider: fos_userbundle
                 resource_owners:
                     github: /auth/check-github
                 oauth_user_provider:
-                    service: application_user.user.provider.fosub_bridge
-                use_forward:   false
-                use_referer:   true
-                always_use_default_target_path: false
+                    service: application_user.user.provider
                 default_target_path: /
 
             anonymous: ~
             logout:
-                path: /auth/logout
-                target: /auth/connect
+                path: /logout
 
     access_control:
-        - { path: ^/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/auth/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: ROLE_USER }
+        - { path: ^/tasks, roles: ROLE_USER }
 
