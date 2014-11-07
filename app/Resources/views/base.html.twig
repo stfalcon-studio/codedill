@@ -8,6 +8,20 @@
     </head>
     <body>
         {% block body %}{% endblock %}
+
         {% block javascripts %}{% endblock %}
+
+        {% javascripts "@bootstrap_js" %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
+        {% stylesheets "@bootstrap_css" %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
+        {% stylesheets "@font_awesome_css" %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
     </body>
 </html>
