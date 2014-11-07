@@ -8,7 +8,8 @@
     <h2>Solutions</h2>
     {% for solution in solutions %}
         #{{ solution.id }}
-        {{ solution.code|highlightCode|raw }}
+
+        {{ ('<pre lang="php">'~solution.code~'</pre>')|highlightCode|raw }}
     {% else %}
         <div role="alert" class="alert alert-info">
             <p>Not found solutions.</p>
