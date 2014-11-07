@@ -1,4 +1,5 @@
 application_core:
-    resource: "@ApplicationCoreBundle/Resources/config/routing.yml"
-    prefix:   /
+    resource: "@ApplicationCoreBundle/Controller/"
+    type: annotation
+    prefix: /
 
