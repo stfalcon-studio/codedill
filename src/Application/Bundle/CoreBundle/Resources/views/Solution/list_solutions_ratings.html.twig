@@ -1,0 +1,12 @@
+{% extends 'ApplicationCoreBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="col-md-12" role="main">
+        {% for rating in ratings %}
+            <div class="bs-callout bs-callout-info">
+                <p>Solution #{{ rating[0].id }} - <b>{{ rating['totalRating'] }}/{{ rating['countRatings'] }} = {{ rating['totalRating'] / rating['countRatings'] }}</b></p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+

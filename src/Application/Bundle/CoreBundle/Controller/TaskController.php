@@ -3,13 +3,16 @@
 namespace Application\Bundle\CoreBundle\Controller;
 
 use Application\Bundle\CoreBundle\Entity\Solution;
+use Application\Bundle\CoreBundle\Entity\SolutionRating;
 use Application\Bundle\CoreBundle\Entity\Task;
+use Application\Bundle\CoreBundle\Form\SolutionRatingType;
 use Application\Bundle\CoreBundle\Form\Type\AddSolutionType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * TaskController
@@ -21,7 +24,7 @@ class TaskController extends Controller
     /**
      * Index page
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      *
      * @Route("/", name="tasks_list")
      * @Method({"GET"})
@@ -36,8 +39,6 @@ class TaskController extends Controller
                 'tasks' => $tasks
             ]
         );
-
-        return $this->render('ApplicationCoreBundle:Task:index.html.twig');
     }
 
     /**
@@ -46,7 +47,7 @@ class TaskController extends Controller
      * @param Task    $task    Task
      * @param Request $request Request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      *
      * @Route("/{id}/add-solution", name="add_solution")
      * @ParamConverter("task", class="ApplicationCoreBundle:Task")
@@ -78,7 +79,7 @@ class TaskController extends Controller
         return $this->render(
             'ApplicationCoreBundle:Task:add_solution.html.twig',
             [
-                'task'  => $task,
+                'task' => $task,
                 'form' => $form->createView()
             ]
         );
@@ -89,7 +90,7 @@ class TaskController extends Controller
      *
      * @param Task $task Task
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      *
      * @Route("/{id}", name="show_task")
      * @ParamConverter("task", class="ApplicationCoreBundle:Task")
@@ -97,13 +98,32 @@ class TaskController extends Controller
      */
     public function showAction(Task $task)
     {
-        $solutions = $this->getDoctrine()->getRepository('ApplicationCoreBundle:Solution')->findByTask($task);
+        /** @var \Application\Bundle\CoreBundle\Repository\SolutionRepository $solutionRepository */
+        $solutionRepository = $this->getDoctrine()->getRepository('ApplicationCoreBundle:Solution');
+
+        /** @var array|Solution[] $solutions */
+        $solutions = $solutionRepository->findBy(['task' => $task]);
+
+        $ratingsForms = [];
+        foreach ($solutions as $solution) {
+            $data = new SolutionRating();
+            $data->setSolution($solution);
+
+            $ratingsForms[] = $this
+                ->get('form.factory')
+                ->createNamed(
+                    'solution_rating_' . $solution->getId(),
+                    new SolutionRatingType(),
+                    $data
+                )
+                ->createView();
+        }
 
         return $this->render(
             'ApplicationCoreBundle:Task:show.html.twig',
             [
-                'task'      => $task,
-                'solutions' => $solutions
+                'task'          => $task,
+                'ratings_forms' => $ratingsForms
             ]
         );
     }
