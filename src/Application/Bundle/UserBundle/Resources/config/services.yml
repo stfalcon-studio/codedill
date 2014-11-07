@@ -1,4 +1,4 @@
 services:
     application_user.user.provider.fosub_bridge:
         class: Application\Bundle\UserBundle\Security\Core\User\FOSUserProvider
-        arguments: [@fos_user.user_manager, {my_github: githubId}]
+        arguments: [@fos_user.user_manager, {github: githubId}]
