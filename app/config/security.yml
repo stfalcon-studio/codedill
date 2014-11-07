@@ -1,12 +1,33 @@
 security:
     providers:
-        in_memory:
-            memory: ~
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        secured_area:
+            pattern: ^/
+            oauth:
+                failure_path: /auth/connect
+                login_path: /auth/connect/github
+                check_path: /auth/connect
+                provider: fos_userbundle
+                resource_owners:
+                    github: /auth/check-github
+                oauth_user_provider:
+                    service: application_user.user.provider
+                default_target_path: /
 
-        default:
             anonymous: ~
+            logout:
+                path: /logout
+
+    access_control:
+        - { path: ^/auth/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/tasks, roles: ROLE_USER }
+
