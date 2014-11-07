@@ -36,7 +36,7 @@ class LoadSolutionData extends AbstractFixture implements DependentFixtureInterf
          * @var \Application\Bundle\CoreBundle\Entity\Task $task2
          */
         $task1 = $this->getReference('task-1');
-        $task2 = $this->getReference('task-1');
+        $task2 = $this->getReference('task-2');
 
         $solution = (new Solution())->setTask($task1)
                                     ->setCode(<<<'DESC'
