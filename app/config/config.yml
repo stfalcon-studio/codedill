@@ -61,3 +61,8 @@ sp_bower:
             cache:
                 id: ~
                 directory: %kernel.root_dir%/../web/bower/cache
+
+sensio_framework_extra:
+   request:
+       converters: true
+       auto_convert: false
