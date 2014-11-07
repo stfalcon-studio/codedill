@@ -1,0 +1,24 @@
+{% extends 'ApplicationCoreBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="col-md-9" role="main">
+        {% for solution in solutions %}
+            <div class="bs-callout bs-callout-info">
+                <h1 class="page-header" id="solution-{{ solution.id }}">Solution #{{ solution.id }}</h1>
+
+                <pre>{{ solution.code }}</pre>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="col-md-3">
+        <div class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
+            <ul class="nav bs-docs-sidenav">
+                {% for solution in solutions %}
+                    <li><a href="#solution-{{ solution.id }}">Solution #{{ solution.id }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+
