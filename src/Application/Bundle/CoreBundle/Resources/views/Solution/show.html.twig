@@ -1,0 +1,11 @@
+{% extends 'ApplicationCoreBundle::layout.html.twig' %}
+{% block content %}
+    <code> {{ solution.code }}</code>
+    <div id="fos_comment_thread"></div>
+
+{% endblock %}
+{% block javascripts %}
+    {% javascripts '@FOSCommentBundle/Resources/assets/js/comments.js' %}
+    {% include 'ApplicationCoreBundle:Solution:_comment.html.twig' with {'solution': solution, 'asset_url' : asset_url } %}
+    {% endjavascripts %}
+{% endblock %}

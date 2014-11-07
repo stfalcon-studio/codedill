@@ -2,6 +2,7 @@
 
 namespace Application\Bundle\CoreBundle\Controller;
 
+use Application\Bundle\CoreBundle\Entity\Solution;
 use Application\Bundle\CoreBundle\Entity\Task;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -65,5 +66,19 @@ class SolutionController extends Controller
                 'solutions' => $taskSolutions
             ]
         );
+    }
+
+    /**
+     * @param Solution $solution
+     *
+     * @Route("/solution/{id}", name="show_solution")
+     * @ParamConverter("solution", class="ApplicationCoreBundle:Solution")
+     * @Method({"GET"})
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showSolution(Solution $solution)
+    {
+        return $this->render('ApplicationCoreBundle:Solution:show.html.twig', ['solution' => $solution]);
     }
 }

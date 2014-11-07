@@ -2,8 +2,4 @@ application_core_task:
     path:     /
     defaults: { _controller: ApplicationCoreBundle:Task:index }
 
-fos_comment_api:
-    type: rest
-    resource: "@FOSCommentBundle/Resources/config/routing.yml"
-    prefix: /api
-    defaults: { _format: html }
+
