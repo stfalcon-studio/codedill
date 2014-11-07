@@ -3,14 +3,27 @@
 namespace Application\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Application\Bundle\CoreBundle\Entity\Solution;
 
 /**
  * Load Solution fixtures
  */
-class LoadSolutionData extends AbstractFixture
+class LoadSolutionData extends AbstractFixture implements DependentFixtureInterface
 {
+    /**
+     * Get dependencies
+     *
+     * @return array Dependencies
+     */
+    public function getDependencies()
+    {
+        return [
+            'Application\Bundle\CoreBundle\DataFixtures\ORM\LoadTaskData',
+        ];
+    }
+
     /**
      * Load fixtures
      *
