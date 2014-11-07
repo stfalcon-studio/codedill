@@ -40,6 +40,7 @@ class LoadSolutionData extends AbstractFixture implements DependentFixtureInterf
 
         $solution = (new Solution())->setTask($task1)
                                     ->setCode(<<<'DESC'
+    <pre lang="php">
     /**
      * Preliminary checks that can skip some fake arrays of words
      *
@@ -53,6 +54,7 @@ class LoadSolutionData extends AbstractFixture implements DependentFixtureInterf
                && CrosswordHelper::canBeCrossword($words)
                && CrosswordHelper::firstAndLastLettersAreCompatible($words);
     }
+    </pre>
 DESC
                             );
         $this->addReference('solution-1', $solution);
@@ -60,6 +62,7 @@ DESC
 
         $solution = (new Solution())->setTask($task1)
                                     ->setCode(<<<'DESC'
+    <pre lang="php">
     /**
      * Check allowed length for words
      *
@@ -81,6 +84,7 @@ DESC
         }
         return $result;
     }
+    </pre>
 DESC
                             );
         $this->addReference('solution-2', $solution);
@@ -88,6 +92,7 @@ DESC
 
         $solution = (new Solution())->setTask($task2)
                                     ->setCode(<<<'DESC'
+    <pre lang="php">
     /**
      * Check if crossword could be made from array of words
      *
@@ -117,6 +122,7 @@ DESC
         }
         return $result;
     }
+    </pre>
 DESC
                                     );
         $this->addReference('solution-3', $solution);
@@ -124,7 +130,7 @@ DESC
 
         $solution = (new Solution())->setTask($task2)
                                     ->setCode(<<<'DESC'
-
+    <pre lang="php">
     /**
      * Check first and last letters for compatibility
      *
@@ -151,6 +157,7 @@ DESC
         }
         return $result;
     }
+    </pre>
 DESC
                                     );
         $this->addReference('solution-4', $solution);

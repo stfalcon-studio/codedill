@@ -3,19 +3,11 @@
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
-/**
- * AppKernel
- */
 class AppKernel extends Kernel
 {
-    /**
-     * Register bundles
-     *
-     * @return array|\Symfony\Component\HttpKernel\Bundle\BundleInterface[]
-     */
     public function registerBundles()
     {
-        $bundles = [
+        $bundles = array(
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
