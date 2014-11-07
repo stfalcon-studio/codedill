@@ -4,7 +4,7 @@
     <div class="col-md-9" role="main">
         {% for task in tasks %}
             <div class="bs-callout bs-callout-info">
-                <h1 class="page-header" id="task-{{ task.id }}"><a href="{{ path('add_solution', {'id' : task.id}) }}">{{ task.title }}</a></h1>
+                <h1 class="page-header" id="task-{{ task.id }}"><a href="{{ path('show_task', {'id' : task.id}) }}">{{ task.title }}</a></h1>
 
                 <p>{{ task.description }}</p>
             </div>
