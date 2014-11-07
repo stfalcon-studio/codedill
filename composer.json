@@ -25,7 +25,8 @@
         "doctrine/migrations": "dev-master",
         "doctrine/doctrine-migrations-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "1.2.x-dev",
-        "sp/bower-bundle": "0.11"
+        "sp/bower-bundle": "0.11",
+        "friendsofsymfony/comment-bundle": "2.0.6"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
@@ -62,6 +63,7 @@
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
+        "symfony-assets-install": "symlink",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         },
