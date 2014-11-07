@@ -71,3 +71,7 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+sp_bower:
+    bundles:
+        ApplicationCoreBundle: ~
