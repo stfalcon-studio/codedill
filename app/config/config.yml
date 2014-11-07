@@ -70,3 +70,13 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+fos_comment:
+    db_driver: orm
+    class:
+        model:
+            comment: MyProject\MyBundle\Entity\Comment
+            thread: MyProject\MyBundle\Entity\Thread
+
+assetic:
+    bundles: [ "FOSCommentBundle" ]
