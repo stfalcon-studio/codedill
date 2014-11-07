@@ -2,14 +2,39 @@ application_user_homepage:
     path:     /hello/{name}
     defaults: { _controller: ApplicationUserBundle:Default:index }
 
-
+# HWIOAuthBundle
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
-    prefix:   /connect
+    prefix:   /auth/connect
 
 hwi_oauth_login:
     resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
-    prefix:   /login
+    prefix:   /auth/connect
 
-github_login:
-    pattern: /login/check-github
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /auth/connect
+
+hwi_github_login:
+    pattern: /auth/login/check-github
+
+#FOSUserBundle
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+    prefix: /auth
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /auth/profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /auth/register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /auth/resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /auth/profile

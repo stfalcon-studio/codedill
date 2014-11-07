@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Application\Bundle\CoreBundle\ApplicationCoreBundle(),
 
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
 
             new Application\Bundle\UserBundle\ApplicationUserBundle(),
         );

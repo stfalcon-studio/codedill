@@ -1,7 +1,10 @@
 security:
     providers:
-        in_memory:
-            memory: ~
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
 
     firewalls:
         dev:
@@ -12,13 +15,24 @@ security:
             anonymous: ~
 
         secured_area:
-            anonymous: ~
+            pattern: ^/auth
             oauth:
+                failure_path: /auth/connect
+                login_path: /auth/connect
+                check_path: /auth/connect
+                provider: fos_userbundle
                 resource_owners:
-                    my_github:          "/login/check-github"
-                login_path:        /login
-                use_forward:       false
-                failure_path:      /login
-
+                    github:           "/auth/login/check-github"
                 oauth_user_provider:
-                    service: hwi_oauth.user.provider
+                    service: hwi_oauth.user.provider.fosub_bridge
+
+            anonymous: true
+            logout:
+                path:   /auth/logout
+                target: /auth/connect #where to go after logout
+
+    access_control:
+        - { path: ^/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/auth/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/auth, roles: ROLE_USER }
+
