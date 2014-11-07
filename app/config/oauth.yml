@@ -1,0 +1,7 @@
+hwi_oauth:
+    firewall_name: secured_area
+    resource_owners:
+        any_name:
+            type:                github
+            client_id:           %github_client_id%
+            client_secret:       %github_client_secret%
