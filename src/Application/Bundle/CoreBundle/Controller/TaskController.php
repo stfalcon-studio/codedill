@@ -67,6 +67,11 @@ class TaskController extends Controller
             $em->persist($solution);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add(
+                'info',
+                'Your solution has been added!'
+            );
+
             return $this->redirect($this->generateUrl('show_task', ['id' => $task->getId()]));
         }
 
