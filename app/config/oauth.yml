@@ -1,0 +1,25 @@
+hwi_oauth:
+    firewall_name: secured_area
+    connect:
+        confirmation: true
+    resource_owners:
+        github:
+            type:                github
+            client_id:           %github_client_id%
+            client_secret:       %github_client_secret%
+            scope:               "user:email"
+    fosub:
+        # try 30 times to check if a username is available (foo, foo1, foo2 etc)
+        username_iterations: 30
+
+        # mapping between resource owners (see below) and properties
+        properties:
+            github: githubId
+
+fos_user:
+    db_driver: orm
+    firewall_name: secured_area
+    user_class: Application\Bundle\UserBundle\Entity\User
+    registration:
+        confirmation:
+            enabled:    false # change to true for required email confirmation

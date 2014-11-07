@@ -1,0 +1,28 @@
+application_user_homepage:
+    path:     /secret_user/{name}
+    defaults: { _controller: ApplicationUserBundle:Default:index }
+
+# HWIOAuthBundle
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /auth/connect
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /auth/connect
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /auth/connect
+
+hwi_github_login:
+    pattern: /auth/check-github
+
+#FOSUserBundle
+fos_user_security_logout:
+    path: /logout
+    defaults: { _controller: FOSUserBundle:Security:logout }
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
