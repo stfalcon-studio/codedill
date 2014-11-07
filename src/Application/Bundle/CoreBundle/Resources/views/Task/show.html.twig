@@ -19,8 +19,8 @@
         {% set solution = child.vars.data.solution %}
 
         #{{ solution.id }}
-        <pre>
-            {{ ('<pre lang="php">'~solution.code~'</pre>')|highlightCode|raw }}        </pre>
+        {{ ('<pre lang="php">'~solution.code~'</pre>')|highlightCode|raw }}
+
         {% include '@ApplicationCore/SolutionRating/partial/rating.html.twig' with {
             'form': child
         } only %}
