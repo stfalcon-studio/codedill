@@ -86,7 +86,7 @@ class TaskController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/{id}/show", name="show_task")
+     * @Route("/{id}", name="show_task")
      * @ParamConverter("task", class="ApplicationCoreBundle:Task")
      * @Method({"GET"})
      */
