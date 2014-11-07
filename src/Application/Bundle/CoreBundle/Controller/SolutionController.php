@@ -66,4 +66,29 @@ class SolutionController extends Controller
             ]
         );
     }
+
+    /**
+     * List of solutions ratings to task
+     *
+     * @param Task $task Task
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/{id}/rating", name="list_solutions_ratings")
+     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
+     * @Method({"GET"})
+     */
+    public function listSolutionsRatingAction(Task $task)
+    {
+        $solutionsRatingsRepository = $this->getDoctrine()->getManager()->getRepository('ApplicationCoreBundle:SolutionRating');
+        $solutionsRatings = $solutionsRatingsRepository->findSolutionRatingsByTask($task);
+
+
+        return $this->render(
+            'ApplicationCoreBundle:Solution:list_solutions_ratings.html.twig',
+            [
+                'ratings' => $solutionsRatings
+            ]
+        );
+    }
 }
