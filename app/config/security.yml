@@ -18,10 +18,7 @@ security:
                 check_path: /auth/connect
                 provider: fos_userbundle
                 resource_owners:
-                    github: /login/check-github
-                oauth_user_provider:
-                    service: hwi_oauth.user.provider.fosub_bridge
-
+                    github: /auth/check-github
                 oauth_user_provider:
                     service: application_user.user.provider.fosub_bridge
                 use_forward:   false
