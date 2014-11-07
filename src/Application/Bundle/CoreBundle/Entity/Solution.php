@@ -4,13 +4,14 @@ namespace Application\Bundle\CoreBundle\Entity;
 
 use Application\Bundle\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * Application\Bundle\CoreBundle\Entity
  *
  * @ORM\Table(name="solutions")
- * @ORM\Entity(repositoryClass="Application\Bundle\CoreBundle\Repository\SolutionRepository")
+ * @ORM\Entity(repositoryClass="Application\Bundle\CoreBundle\Repository\SolutionRepository") *
  */
 class Solution
 {
@@ -45,6 +46,8 @@ class Solution
      * @var string $code Code
      *
      * @ORM\Column(name="code", type="text", nullable=false)
+     *
+     * @Assert\NotBlank()
      */
     private $code;
 

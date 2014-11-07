@@ -3,8 +3,6 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
         {% stylesheets "@bootstrap_css" %}
             <link rel="stylesheet" href="{{ asset_url }}" />
@@ -13,9 +11,21 @@
         {% stylesheets "@font_awesome_css" %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
+
+        {% block stylesheets %}{% endblock %}
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="container">
+            {% for flashMessage in app.session.flashbag.get('info') %}
+                <div class="alert alert-info">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+
+            {% block body %}{% endblock %}
+        </div>
 
         {% javascripts "@bootstrap_js" %}
             <script src="{{ asset_url }}"></script>

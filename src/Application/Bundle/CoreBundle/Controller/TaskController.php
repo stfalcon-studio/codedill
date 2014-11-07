@@ -6,10 +6,11 @@ use Application\Bundle\CoreBundle\Entity\Solution;
 use Application\Bundle\CoreBundle\Entity\SolutionRating;
 use Application\Bundle\CoreBundle\Entity\Task;
 use Application\Bundle\CoreBundle\Form\SolutionRatingType;
+use Application\Bundle\CoreBundle\Form\Type\AddSolutionType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -42,6 +43,50 @@ class TaskController extends Controller
     }
 
     /**
+     * Add solution to task
+     *
+     * @param Task    $task    Task
+     * @param Request $request Request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/{id}/add-solution", name="add_solution")
+     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
+     * @Method({"GET", "POST"})
+     */
+    public function addSolutionAction(Task $task, Request $request)
+    {
+        $solution = new Solution();
+        $solution->setTask($task);
+
+        $form = $this->createForm(new AddSolutionType(), $solution);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $solution = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($solution);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'info',
+                'Your solution has been added!'
+            );
+
+            return $this->redirect($this->generateUrl('show_task', ['id' => $task->getId()]));
+        }
+
+        return $this->render(
+            'ApplicationCoreBundle:Task:add_solution.html.twig',
+            [
+                'task'  => $task,
+                'form' => $form->createView()
+            ]
+        );
+    }
+
+    /**
      * Show task
      *
      * @param Task    $task Task
@@ -49,7 +94,7 @@ class TaskController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/{id}/show", name="show_task")
+     * @Route("/{id}", name="show_task")
      * @ParamConverter("task", class="ApplicationCoreBundle:Task")
      * @Method({"GET"})
      */

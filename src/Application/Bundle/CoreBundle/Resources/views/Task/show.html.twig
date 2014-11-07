@@ -20,8 +20,7 @@
 
         #{{ solution.id }}
         <pre>
-            {{ solution.code }}
-        </pre>
+            {{ ('<pre lang="php">'~solution.code~'</pre>')|highlightCode|raw }}        </pre>
         {% include '@ApplicationCore/SolutionRating/partial/rating.html.twig' with {
             'form': child
         } only %}
