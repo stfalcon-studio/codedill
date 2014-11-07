@@ -70,7 +70,9 @@ fos_comment:
             thread:  Application\Bundle\CoreBundle\Entity\Thread
 
 assetic:
-    bundles: [ "FOSCommentBundle" ]
+    bundles:
+        - "FOSCommentBundle"
+        - "ApplicationCoreBundle"
 
 sensio_framework_extra:
    request:
