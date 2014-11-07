@@ -1,10 +1,10 @@
 {
-    "name": "symfony/framework-standard-edition",
+    "name": "stfalcon/codedill",
     "license": "MIT",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "Тут росте УКРОП",
     "autoload": {
-        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
+        "psr-4": { "": "src/" }
     },
     "require": {
         "php": ">=5.3.3",
@@ -22,7 +22,10 @@
         "friendsofsymfony/comment-bundle": "2.0.6"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~2.3",
+        "instaclick/php-code-sniffer": "dev-master@dev",
+        "instaclick/symfony2-coding-standard": "dev-remaster@dev",
+        "phpunit/phpunit": "3.7.*"
     },
     "scripts": {
         "post-root-package-install": [
