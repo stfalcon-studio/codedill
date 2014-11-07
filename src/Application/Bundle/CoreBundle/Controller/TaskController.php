@@ -11,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 /**
  * TaskController
  *
- * @Route("/")
+ * @Route("/tasks")
  */
 class TaskController extends Controller
 {
@@ -20,10 +20,10 @@ class TaskController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/", name="index")
+     * @Route("/", name="tasks_list")
      * @Method({"GET"})
      */
-    public function indexAction()
+    public function listAction()
     {
         $tasks = $this->getDoctrine()->getRepository('ApplicationCoreBundle:Task')->findAll();
 
@@ -44,12 +44,17 @@ class TaskController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/add-solution", name="add_solution")
+     * @Route("{id}/add-solution", name="add_solution")
      * @ParamConverter("task", class="ApplicationCoreBundle:Task")
      * @Method({"GET"})
      */
     public function addSolutionAction(Task $task)
     {
-        return $this->render('ApplicationCoreBundle:Task:add_solution.html.twig');
+        return $this->render(
+            'ApplicationCoreBundle:Task:add_solution.html.twig',
+            [
+                'task' => $task
+            ]
+        );
     }
 }
