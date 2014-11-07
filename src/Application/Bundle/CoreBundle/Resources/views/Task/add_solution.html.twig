@@ -1,5 +1,6 @@
 {% extends 'ApplicationCoreBundle:Task:index.html.twig' %}
 
 {% block content %}
-    {{ task.title }}
+    <h1>{{ task.title }} (<a href="{{ path('tasks_list') }}"><-back</a>)</h1>
+    <div class="well">{{ task.description }}</div>
 {% endblock %}
