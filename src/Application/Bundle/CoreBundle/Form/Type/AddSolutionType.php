@@ -20,8 +20,7 @@ class AddSolutionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code', 'textarea')
-            ->add('save', 'submit');
+            ->add('code', 'textarea');
     }
 
     /**
