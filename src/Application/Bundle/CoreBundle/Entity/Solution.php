@@ -38,7 +38,7 @@ class Solution
     /**
      * @var string $code Code
      *
-     * @ORM\Column(name="name", type="text", nullable=false)
+     * @ORM\Column(name="code", type="text", nullable=false)
      */
     private $code;
 

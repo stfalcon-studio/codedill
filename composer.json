@@ -18,6 +18,9 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0"
+        "doctrine/migrations": "dev-master",
+        "doctrine/doctrine-migrations-bundle": "dev-master",
+        "stof/doctrine-extensions-bundle": "1.2.x-dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
