@@ -92,7 +92,7 @@ class Task
     /**
      * Get solutions
      *
-     * @return ArrayCollection
+     * @return ArrayCollection|Solution[]
      */
     public function getSolutions()
     {
