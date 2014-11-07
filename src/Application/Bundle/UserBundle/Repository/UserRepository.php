@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Bundle\CoreBundle\Repository;
+namespace Application\Bundle\UserBundle\Repository;
 
 use Doctrine\ORM\Query;
 use Doctrine\ORM\EntityRepository;
