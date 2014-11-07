@@ -1,5 +1,14 @@
 {% extends 'ApplicationCoreBundle:Task:index.html.twig' %}
 
+{#{% block javascripts %}#}
+    {#{{ parent() }}#}
+    {#{% javascripts#}
+        {#'@ApplicationCoreBundle/Resources/public/js/rating.js'#}
+    {#%}#}
+        {#<script type="text/javascript" src="{{ asset_url }}"></script>#}
+    {#{% endjavascripts %}#}
+{#{% endblock %}#}
+
 {% block content %}
     <h1>{{ task.title }} (<a href="{{ path('tasks_list') }}"><-back</a>)</h1>
     <div class="well">{{ task.description }}</div>
@@ -17,4 +26,5 @@
         </div>
     {% endfor %}
 
+    {% include 'ApplicationCoreBundle:Rating:controller.html.twig' %}
 {% endblock %}
