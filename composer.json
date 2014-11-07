@@ -1,10 +1,10 @@
 {
-    "name": "symfony/framework-standard-edition",
+    "name": "stfalcon/codedill",
     "license": "MIT",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "Тут росте УКРОП",
     "autoload": {
-        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
+        "psr-4": { "": "src/" }
     },
     "require": {
         "php": ">=5.3.3",
