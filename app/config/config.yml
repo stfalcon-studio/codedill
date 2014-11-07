@@ -1,8 +1,8 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: oauth.yml }
     - { resource: doctrine.yml }
+    - { resource: oauth.yml }
 
 framework:
     #esi:             ~

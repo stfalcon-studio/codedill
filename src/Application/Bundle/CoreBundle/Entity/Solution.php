@@ -4,6 +4,9 @@ namespace Application\Bundle\CoreBundle\Entity;
 
 use Application\Bundle\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\ORM\Mapping\PrePersist;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
@@ -11,6 +14,8 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  *
  * @ORM\Table(name="solutions")
  * @ORM\Entity(repositoryClass="Application\Bundle\CoreBundle\Repository\SolutionRepository")
+ *
+ * @HasLifecycleCallbacks
  */
 class Solution
 {
@@ -45,6 +50,8 @@ class Solution
      * @var string $code Code
      *
      * @ORM\Column(name="code", type="text", nullable=false)
+     *
+     * @Assert\NotBlank()
      */
     private $code;
 
@@ -112,6 +119,14 @@ class Solution
     public function getCode()
     {
         return $this->code;
+    }
+
+    /**
+     * @PrePersist
+     */
+    public function prePersist()
+    {
+        $this->setCode('<pre lang="php">' . $this->getCode() . '</pre>');
     }
 
     /**

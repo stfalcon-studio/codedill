@@ -26,7 +26,8 @@
         "doctrine/doctrine-migrations-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "1.2.x-dev",
         "sp/bower-bundle": "0.11",
-        "friendsofsymfony/comment-bundle": "2.0.6"
+        "friendsofsymfony/comment-bundle": "2.0.6",
+        "geshi/geshi": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

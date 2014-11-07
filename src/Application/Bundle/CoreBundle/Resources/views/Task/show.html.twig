@@ -17,9 +17,7 @@
     <h2>Solutions</h2>
     {% for solution in solutions %}
         #{{ solution.id }}
-        <pre>
-            {{ solution.code }}
-        </pre>
+        {{ solution.code|highlightCode|raw }}
     {% else %}
         <div role="alert" class="alert alert-info">
             <p>Not found solutions.</p>

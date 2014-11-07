@@ -6,3 +6,4 @@ application_core:
     resource: "@ApplicationCoreBundle/Controller/"
     type: annotation
     prefix: /
+
