@@ -53,3 +53,16 @@ Change DBAL setting in `app/config/config.yml`, `app/config/config_dev.yml` or
     $ ./console doctrine:fixtures:load
 
 You can set environment `test` for command if you add `--env=test` to it.
+
+### h) Register your application in GitHub
+ 
+Open https://github.com/settings/applications/new
+
+    * Application name:           CodeDill
+    * Homepage URL:               http://codedill.work
+    * Authorization callback URL: http://codedill.work/auth/check-github
+    
+Press the button "Register application"
+
+Use the newly generated `Client ID` and `Client Secret` parameters    
+ 
