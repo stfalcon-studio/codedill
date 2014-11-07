@@ -34,7 +34,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        [ "ApplicationCoreBundle", "FOSCommentBundle"]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -68,5 +68,4 @@ fos_comment:
             comment:  Application\Bundle\CoreBundle\Entity\Comment
             thread:  Application\Bundle\CoreBundle\Entity\Thread
 
-assetic:
-    bundles: [ "FOSCommentBundle" ]
+

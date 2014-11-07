@@ -4,15 +4,19 @@
 namespace Application\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  *  Class TreadRelation
  *
  * @ORM\Entity
  * @ORM\Table(name="thread_relation", uniqueConstraints={@ORM\UniqueConstraint(name="relation_idx", columns={"relation"})})
-
  */
-class TreadRelation {
+class TreadRelation
+{
+
+    const  SOLUTION_TYPE = 'solution_type';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -21,9 +25,15 @@ class TreadRelation {
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=16)
+     * @ORM\Column(type="string")
      */
-    protected $relation;
+    protected $relationId;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\Choice(callback = "getAvailableTypes")
+     */
+    protected $relationType;
 
     /**
      * @ORM\OneToOne(targetEntity="Application\Bundle\CoreBundle\Entity\Thread")
@@ -48,18 +58,26 @@ class TreadRelation {
     }
 
     /**
-     * @return string
+     * @return Thread
      */
-    public function getRelation()
+    public function getThread()
     {
-        return $this->relation;
+        return $this->thread;
     }
 
     /**
-     * @param string $relation
+     * @param Thread $thread
      */
-    public function setRelation($relation)
+    public function setThread($thread)
     {
-        $this->relation = $relation;
+        $this->thread = $thread;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAvailableTypes()
+    {
+        return [self::SOLUTION_TYPE];
     }
 }
