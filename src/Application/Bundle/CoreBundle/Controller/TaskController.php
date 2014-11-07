@@ -31,6 +31,7 @@ class TaskController extends Controller
                 'tasks' => $tasks
             ]
         );
+
         return $this->render('ApplicationCoreBundle:Task:index.html.twig');
     }
 
