@@ -45,7 +45,7 @@ class TaskController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("{id}/add-solution", name="add_solution")
+     * @Route("/{id}/add-solution", name="add_solution")
      * @ParamConverter("task", class="ApplicationCoreBundle:Task")
      * @Method({"GET"})
      */
@@ -55,6 +55,30 @@ class TaskController extends Controller
             'ApplicationCoreBundle:Task:add_solution.html.twig',
             [
                 'task' => $task
+            ]
+        );
+    }
+
+    /**
+     * Show task
+     *
+     * @param Task $task Task
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/{id}/show", name="show_task")
+     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
+     * @Method({"GET"})
+     */
+    public function showAction(Task $task)
+    {
+        $solutions = $this->getDoctrine()->getRepository('ApplicationCoreBundle:Solution')->findByTask($task);
+
+        return $this->render(
+            'ApplicationCoreBundle:Task:show.html.twig',
+            [
+                'task'      => $task,
+                'solutions' => $solutions
             ]
         );
     }
