@@ -70,7 +70,6 @@ fos_comment:
 
 assetic:
     bundles: [ "FOSCommentBundle" ]
-                directory: %kernel.root_dir%/../web/bower/cache
 
 sensio_framework_extra:
    request:
