@@ -45,7 +45,7 @@ class SolutionRating
      *
      * @ORM\Column(name="rating_value", type="smallint", nullable=false)
      */
-    private $ratingValue = 0;
+    private $ratingValue;
 
     /**
      * @var \DateTime
