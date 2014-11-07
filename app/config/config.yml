@@ -73,4 +73,9 @@ swiftmailer:
 
 sp_bower:
     bundles:
-        ApplicationCoreBundle: ~
+        ApplicationCoreBundle:
+            config_dir: Resources/config/bower
+            asset_dir: %kernel.root_dir%/../web/bower/components
+            cache:
+                id: ~
+                directory: %kernel.root_dir%/../web/bower/cache
