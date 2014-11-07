@@ -35,8 +35,9 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
-    #java: /usr/bin/java
+    bundles:
+        - FOSCommentBundle
+        - ApplicationCoreBundle
     filters:
         cssrewrite: ~
         #closure:
@@ -68,11 +69,6 @@ fos_comment:
         model:
             comment:  Application\Bundle\CoreBundle\Entity\Comment
             thread:  Application\Bundle\CoreBundle\Entity\Thread
-
-assetic:
-    bundles:
-        - "FOSCommentBundle"
-        - "ApplicationCoreBundle"
 
 sensio_framework_extra:
    request:
