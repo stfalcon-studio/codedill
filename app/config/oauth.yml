@@ -14,7 +14,7 @@ hwi_oauth:
 
         # mapping between resource owners (see below) and properties
         properties:
-            github: githubID
+            my_github: githubId
 
 fos_user:
     db_driver: orm
