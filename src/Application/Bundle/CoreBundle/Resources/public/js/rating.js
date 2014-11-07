@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    $('#rating-form input[name="rating"]').change(function(e) {
-        var form = $('#rating-form');
+    $('.solution-rating-value').on('change', 'input:radio', function(e) {
+        var form = $(this).closest('form');
         var url = form.prop('action');
         $.post(url, form.serialize());
     });

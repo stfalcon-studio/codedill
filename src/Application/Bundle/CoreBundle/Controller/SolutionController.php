@@ -3,7 +3,6 @@
 namespace Application\Bundle\CoreBundle\Controller;
 
 use Application\Bundle\CoreBundle\Entity\Task;
-use Application\Bundle\CoreBundle\Form\SolutionRatingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -68,16 +67,12 @@ class SolutionController extends Controller
             throw new AccessDeniedHttpException('You must first post your solution');
         }
 
-        $ratingForm = $this->createForm(new SolutionRatingType());
-        $ratingForm->handleRequest($ratingForm);
-
         $taskSolutions = $solutionsRepository->findBy(['task' => $task], ['createdAt' => 'DESC']);
 
         return $this->render(
             'ApplicationCoreBundle:Solution:list_solutions.html.twig',
             [
-                'solutions'   => $taskSolutions,
-                'rating_form' => $ratingForm->createView()
+                'solutions' => $taskSolutions
             ]
         );
     }

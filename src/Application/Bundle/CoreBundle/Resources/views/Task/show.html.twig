@@ -15,16 +15,19 @@
     <a class="btn-success btn" href="{{ path('add_solution', {'id' : task.id}) }}">Add solution</a>
 
     <h2>Solutions</h2>
-    {% for solution in solutions %}
+    {% for child in ratings_forms %}
+        {% set solution = child.vars.data.solution %}
+
         #{{ solution.id }}
         <pre>
             {{ solution.code }}
         </pre>
+        {% include '@ApplicationCore/SolutionRating/partial/rating.html.twig' with {
+            'form': child
+        } only %}
     {% else %}
         <div role="alert" class="alert alert-info">
             <p>Not found solutions.</p>
         </div>
     {% endfor %}
-
-    {% include 'ApplicationCoreBundle:Rating:controller.html.twig' %}
 {% endblock %}

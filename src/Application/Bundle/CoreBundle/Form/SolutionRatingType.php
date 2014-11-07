@@ -21,10 +21,13 @@ class SolutionRatingType extends AbstractType
                 'rating_value',
                 'choice',
                 [
-                    'label'       => 'Rating',
-                    'empty_value' => false,
-                    'multiple'    => false,
-                    'expanded'    => true
+                    'choices'  => range(0, 5),
+                    'label'    => 'Rating',
+                    'multiple' => false,
+                    'expanded' => true,
+                    'attr'     => [
+                        'class' => 'solution-rating-value'
+                    ]
                 ]
             );
     }
@@ -44,7 +47,8 @@ class SolutionRatingType extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => 'Application\Bundle\CoreBundle\Entity\SolutionRating'
+                'data_class'      => 'Application\Bundle\CoreBundle\Entity\SolutionRating',
+                'csrf_protection' => false
             ]
         );
     }

@@ -2,11 +2,15 @@
 
 namespace Application\Bundle\CoreBundle\Controller;
 
+use Application\Bundle\CoreBundle\Entity\Solution;
+use Application\Bundle\CoreBundle\Entity\SolutionRating;
 use Application\Bundle\CoreBundle\Entity\Task;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Application\Bundle\CoreBundle\Form\SolutionRatingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * TaskController
@@ -40,7 +44,8 @@ class TaskController extends Controller
     /**
      * Show task
      *
-     * @param Task $task Task
+     * @param Task    $task Task
+     * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -48,15 +53,34 @@ class TaskController extends Controller
      * @ParamConverter("task", class="ApplicationCoreBundle:Task")
      * @Method({"GET"})
      */
-    public function showAction(Task $task)
+    public function showAction(Task $task, Request $request)
     {
-        $solutions = $this->getDoctrine()->getRepository('ApplicationCoreBundle:Solution')->findByTask($task);
+        /** @var \Application\Bundle\CoreBundle\Repository\SolutionRepository $solutionRepository */
+        $solutionRepository = $this->getDoctrine()->getRepository('ApplicationCoreBundle:Solution');
+
+        /** @var array|Solution[] $solutions */
+        $solutions = $solutionRepository->findBy(['task' => $task]);
+
+        $ratingsForms = [];
+        foreach ($solutions as $solution) {
+            $data = new SolutionRating();
+            $data->setSolution($solution);
+
+            $ratingsForms[] = $this
+                ->get('form.factory')
+                ->createNamed(
+                    'solution_rating_' . $solution->getId(),
+                    new SolutionRatingType(),
+                    $data
+                )
+                ->createView();
+        }
 
         return $this->render(
             'ApplicationCoreBundle:Task:show.html.twig',
             [
-                'task'      => $task,
-                'solutions' => $solutions
+                'task'          => $task,
+                'ratings_forms' => $ratingsForms
             ]
         );
     }
