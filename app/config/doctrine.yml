@@ -12,3 +12,14 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
         naming_strategy: doctrine.orm.naming_strategy.underscore
+
+stof_doctrine_extensions:
+    default_locale: %locale%
+    uploadable:
+        # Default file path: This is one of the three ways you can configure the path for the Uploadable extension
+        default_file_path: %kernel.root_dir%/../web/uploads
+    orm:
+        default:
+            timestampable: true
+            uploadable: true
+            softdeleteable: true
