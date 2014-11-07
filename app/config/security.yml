@@ -15,11 +15,8 @@ security:
             anonymous: ~
 
         secured_area:
-            pattern: ^/auth
+            pattern: ^/
             oauth:
-                failure_path: /auth/connect
-                login_path: /auth/connect
-                check_path: /auth/connect
                 provider: fos_userbundle
                 resource_owners:
                     my_github:          "/login/check-github"
@@ -31,12 +28,7 @@ security:
                     service: application_user.user.provider.fosub_bridge
 
             anonymous: true
-            logout:
-                path:   /auth/logout
-                target: /auth/connect #where to go after logout
 
     access_control:
-        - { path: ^/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/auth/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/auth, roles: ROLE_USER }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
