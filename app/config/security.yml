@@ -22,9 +22,13 @@ security:
                 check_path: /auth/connect
                 provider: fos_userbundle
                 resource_owners:
-                    github:           "/auth/login/check-github"
+                    my_github:          "/login/check-github"
+                login_path:        /login
+                use_forward:       false
+                failure_path:      /login
+
                 oauth_user_provider:
-                    service: hwi_oauth.user.provider.fosub_bridge
+                    service: application_user.user.provider.fosub_bridge
 
             anonymous: true
             logout:

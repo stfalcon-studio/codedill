@@ -1,4 +1,4 @@
 services:
-#    application_user.example:
-#        class: Application\Bundle\UserBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    application_user.user.provider.fosub_bridge:
+        class: Application\Bundle\UserBundle\Security\Core\User\FOSUserProvider
+        arguments: [@fos_user.user_manager, {my_github: githubId}]
