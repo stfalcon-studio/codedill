@@ -1,5 +1,5 @@
 application_user_homepage:
-    path:     /hello/{name}
+    path:     /secret_user/{name}
     defaults: { _controller: ApplicationUserBundle:Default:index }
 
 # HWIOAuthBundle
@@ -16,7 +16,7 @@ hwi_oauth_connect:
     prefix:   /auth/connect
 
 hwi_github_login:
-    pattern: /auth/login/check-github
+    pattern: /auth/check-github
 
 #FOSUserBundle
 fos_user_security:

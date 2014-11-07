@@ -10,25 +10,32 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-        default:
-            anonymous: ~
-
         secured_area:
             pattern: ^/
             oauth:
+                failure_path: /auth/connect
+                login_path: /auth/connect
+                check_path: /auth/connect
                 provider: fos_userbundle
                 resource_owners:
-                    my_github:          "/login/check-github"
-                login_path:        /login
-                use_forward:       false
-                failure_path:      /login
+                    github: /login/check-github
+                oauth_user_provider:
+                    service: hwi_oauth.user.provider.fosub_bridge
 
                 oauth_user_provider:
                     service: application_user.user.provider.fosub_bridge
+                use_forward:   false
+                use_referer:   true
+                always_use_default_target_path: false
+                default_target_path: /
 
-            anonymous: true
+            anonymous: ~
+            logout:
+                path: /auth/logout
+                target: /auth/connect
 
     access_control:
-        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/auth/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER }
 

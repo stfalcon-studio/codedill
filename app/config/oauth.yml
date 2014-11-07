@@ -3,7 +3,7 @@ hwi_oauth:
     connect:
         confirmation: true
     resource_owners:
-        my_github:
+        github:
             type:                github
             client_id:           %github_client_id%
             client_secret:       %github_client_secret%
@@ -14,11 +14,11 @@ hwi_oauth:
 
         # mapping between resource owners (see below) and properties
         properties:
-            my_github: githubId
+            github: githubId
 
 fos_user:
     db_driver: orm
-    firewall_name: secure_area
+    firewall_name: secured_area
     user_class: Application\Bundle\UserBundle\Entity\User
     registration:
         confirmation:
