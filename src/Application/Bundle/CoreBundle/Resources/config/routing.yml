@@ -1,6 +1,6 @@
-application_core_homepage:
+application_core_task:
     path:     /
-    defaults: { _controller: ApplicationCoreBundle:Default:index }
+    defaults: { _controller: ApplicationCoreBundle:Task:index }
 
 fos_comment_api:
     type: rest

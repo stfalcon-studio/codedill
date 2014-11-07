@@ -2,7 +2,9 @@
 
 namespace Application\Bundle\CoreBundle\Entity;
 
+use Application\Bundle\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * Application\Bundle\CoreBundle\Entity
@@ -12,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Solution
 {
+    use TimestampableEntity;
+
     /**
      * @var int $id ID
      *
@@ -22,8 +26,10 @@ class Solution
     private $id;
 
     /**
-     * @todo Add relation to user
-     * @var User $user User
+     * @var User $user
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Bundle\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
@@ -106,5 +112,29 @@ class Solution
     public function getCode()
     {
         return $this->code;
+    }
+
+    /**
+     * Get user
+     *
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set user
+     *
+     * @param User $user
+     *
+     * @return Solution
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

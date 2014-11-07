@@ -1,0 +1,26 @@
+{% extends 'ApplicationCoreBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="col-md-9" role="main">
+        {% for task in tasks %}
+            <div class="bs-callout bs-callout-info">
+                <h1 class="page-header" id="task-{{ task.id }}"><a href="{{ path('show_task', {'id' : task.id}) }}">{{ task.title }}</a></h1>
+
+                <p>{{ task.description }}</p>
+            </div>
+        {% else %}
+            <div role="alert" class="alert alert-info">
+                <p>Not found tasks.</p>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="col-md-3">
+        <div class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
+            <ul class="nav bs-docs-sidenav">
+                {% for task in tasks %}
+                    <li><a href="#task-{{ task.id }}">{{ task.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

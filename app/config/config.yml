@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: oauth.yml }
     - { resource: doctrine.yml }
 
 framework:
@@ -68,4 +69,7 @@ fos_comment:
             comment:  Application\Bundle\CoreBundle\Entity\Comment
             thread:  Application\Bundle\CoreBundle\Entity\Thread
 
-
+sensio_framework_extra:
+   request:
+       converters: true
+       auto_convert: false

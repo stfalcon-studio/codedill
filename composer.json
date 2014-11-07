@@ -18,6 +18,10 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
+
+        "hwi/oauth-bundle": "0.4.*@dev",
+        "friendsofsymfony/user-bundle": "2.0.*@dev",
+        "gedmo/doctrine-extensions": "2.3.*@dev",
         "doctrine/migrations": "dev-master",
         "doctrine/doctrine-migrations-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "1.2.x-dev",
@@ -28,7 +32,9 @@
         "sensio/generator-bundle": "~2.3",
         "instaclick/php-code-sniffer": "dev-master@dev",
         "instaclick/symfony2-coding-standard": "dev-remaster@dev",
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "3.7.*",
+        "doctrine/doctrine-fixtures-bundle": "2.2.x-dev",
+        "doctrine/data-fixtures": "1.0.x-dev"
     },
     "scripts": {
         "post-root-package-install": [

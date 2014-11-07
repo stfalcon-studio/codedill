@@ -1,0 +1,20 @@
+{% extends 'ApplicationCoreBundle:Task:index.html.twig' %}
+
+{% block content %}
+    <h1>{{ task.title }} (<a href="{{ path('tasks_list') }}"><-back</a>)</h1>
+    <div class="well">{{ task.description }}</div>
+    <a class="btn-success btn" href="{{ path('add_solution', {'id' : task.id}) }}">Add solution</a>
+
+    <h2>Solutions</h2>
+    {% for solution in solutions %}
+        #{{ solution.id }}
+        <pre>
+            {{ solution.code }}
+        </pre>
+    {% else %}
+        <div role="alert" class="alert alert-info">
+            <p>Not found solutions.</p>
+        </div>
+    {% endfor %}
+
+{% endblock %}

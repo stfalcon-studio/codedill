@@ -3,6 +3,7 @@
 namespace Application\Bundle\CoreBundle\Entity;
 
 
+use Application\Bundle\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\CommentBundle\Entity\Comment as BaseComment;
 
@@ -27,4 +28,32 @@ class Comment extends BaseComment
      * @ORM\ManyToOne(targetEntity="Application\Bundle\CoreBundle\Entity\Thread")
      */
     protected $thread;
+
+    /**
+     * @var User $user
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Bundle\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return Comment
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 }

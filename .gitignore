@@ -9,5 +9,5 @@
 /vendor/
 /bin/
 /composer.phar
-/web/bower/components/
-/web/bower/cache/
+/web/bower/components/*
+/web/bower/cache/*
