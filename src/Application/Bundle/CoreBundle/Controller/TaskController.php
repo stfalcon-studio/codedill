@@ -2,7 +2,9 @@
 
 namespace Application\Bundle\CoreBundle\Controller;
 
+use Application\Bundle\CoreBundle\Entity\Solution;
 use Application\Bundle\CoreBundle\Entity\Task;
+use Application\Bundle\CoreBundle\Form\Type\AddSolutionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -50,10 +52,13 @@ class TaskController extends Controller
      */
     public function addSolutionAction(Task $task)
     {
+        $form = $this->createForm(new AddSolutionType(), new Solution());
+
         return $this->render(
             'ApplicationCoreBundle:Task:add_solution.html.twig',
             [
-                'task' => $task
+                'task'  => $task,
+                'form' => $form->createView()
             ]
         );
     }

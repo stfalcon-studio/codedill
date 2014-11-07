@@ -3,4 +3,6 @@
 {% block content %}
     <h1>{{ task.title }} (<a href="{{ path('tasks_list') }}"><-back</a>)</h1>
     <div class="well">{{ task.description }}</div>
+
+    {{ form(form) }}
 {% endblock %}
