@@ -60,7 +60,7 @@ class SolutionController extends Controller
         $taskSolutions = $solutionsRepository->findBy(['task' => $task], ['createdAt' => 'DESC']);
 
         return $this->render(
-            'ApplicationCoreBundle:Task:list_solutions.html.twig',
+            'ApplicationCoreBundle:Solution:list_solutions.html.twig',
             [
                 'solutions' => $taskSolutions
             ]
