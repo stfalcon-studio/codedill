@@ -27,7 +27,11 @@ class AppKernel extends Kernel
             new Application\Bundle\CoreBundle\ApplicationCoreBundle(),
             new Sp\BowerBundle\SpBowerBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle()
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            //comment bundle
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\CommentBundle\FOSCommentBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

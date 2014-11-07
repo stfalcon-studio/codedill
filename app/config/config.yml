@@ -61,6 +61,16 @@ sp_bower:
             cache:
                 id: ~
                 directory: %kernel.root_dir%/../web/bower/cache
+fos_comment:
+    db_driver: orm
+    class:
+        model:
+            comment:  Application\Bundle\CoreBundle\Entity\Comment
+            thread:  Application\Bundle\CoreBundle\Entity\Thread
+
+assetic:
+    bundles: [ "FOSCommentBundle" ]
+                directory: %kernel.root_dir%/../web/bower/cache
 
 sensio_framework_extra:
    request:
