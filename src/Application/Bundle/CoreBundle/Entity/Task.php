@@ -2,8 +2,10 @@
 
 namespace Application\Bundle\CoreBundle\Entity;
 
+use Application\Bundle\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * Application\Bundle\CoreBundle\Task
@@ -13,6 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Task
 {
+    use TimestampableEntity;
+
     /**
      * @var int $id ID
      *
@@ -23,8 +27,10 @@ class Task
     private $id;
 
     /**
-     * @todo Add relation to user
-     * @var User $user User
+     * @var User $user
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Bundle\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
@@ -176,5 +182,29 @@ class Task
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Get user
+     *
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set user
+     *
+     * @param User $user
+     *
+     * @return Task
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }
