@@ -7,8 +7,8 @@ use Application\Bundle\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * UserController
@@ -29,15 +29,31 @@ class UserController extends Controller
      */
     public function userSolutionsActions(User $user)
     {
+        // Check if user from URL is same as current user
+        if ($user->getId() != $this->getUser()->getId()) {
+            throw new AccessDeniedException();
+        }
+
         $em = $this->getDoctrine()->getManager();
         $solutionRepository = $em->getRepository('ApplicationCoreBundle:Solution');
+        $threadRepository   = $em->getRepository('ApplicationCoreBundle:Thread');
+
+        /** @var \Application\Bundle\CoreBundle\Entity\Solution[] $solutions */
         $solutions = $solutionRepository->findBy(['user' => $user]);
+
+        $threadIds = [];
+        foreach ($solutions as $solution) {
+            $threadIds[] = 's_' . $solution->getId();
+        }
+
+        $solutionCommentsNum = $threadRepository->getThreadsCommentsStats($threadIds);
 
         return $this->render(
             'ApplicationCoreBundle:User:solutions.html.twig',
             [
-                'user'      => $user,
-                'solutions' => $solutions
+                'user'                    => $user,
+                'solutions'               => $solutions,
+                'solution_comments_stats' => $solutionCommentsNum
             ]
         );
     }
