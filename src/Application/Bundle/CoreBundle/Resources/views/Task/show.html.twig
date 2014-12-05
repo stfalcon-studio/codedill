@@ -19,5 +19,8 @@
         <a class="btn-success btn" href="{{ path('add_solution', {'id' : task.id}) }}">Add solution</a>
     {% endif %}
 
-    <a class="btn btn-info" href="{{ path('task_solutions_list', {'id': task.id}) }}">Review solutions</a>
+    {% if (is_user_solution) %}
+        <a class="btn btn-info" href="{{ path('task_solutions_list', {'id': task.id}) }}">Review solutions</a>
+    {% endif %}
+
 {% endblock %}
