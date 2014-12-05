@@ -57,4 +57,26 @@ class UserController extends Controller
             ]
         );
     }
+
+    /**
+     * User solution action
+     *
+     * @param $solution
+     *
+     * @internal param int $solution_id
+     *
+     * @return Response
+     *
+     * @Route("/solutions/{id}", name="user_solution_feedback")
+     * @ParamConverter("solution", class="ApplicationCoreBundle:Solution")
+     */
+    public function userSolutionFeedbackActions($solution)
+    {
+        return $this->render(
+            'ApplicationCoreBundle:User:solution_feedback.html.twig',
+            [
+                'solution' => $solution
+            ]
+        );
+    }
 }
