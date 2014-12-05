@@ -35,7 +35,14 @@
         "instaclick/symfony2-coding-standard": "dev-remaster@dev",
         "phpunit/phpunit": "3.7.*",
         "doctrine/doctrine-fixtures-bundle": "2.2.x-dev",
-        "doctrine/data-fixtures": "1.0.x-dev"
+        "doctrine/data-fixtures": "1.0.x-dev",
+        "behat/behat": "~3.0",
+        "behat/mink": "~1.6",
+        "behat/symfony2-extension": "~2.0",
+        "behat/mink-extension": "~2.0",
+        "behat/mink-browserkit-driver": "~1.2",
+        "behat/mink-selenium2-driver": "~1.2",
+        "behat/common-contexts": "1.2.*@dev"
     },
     "scripts": {
         "post-root-package-install": [
