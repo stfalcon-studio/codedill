@@ -10,6 +10,7 @@ use FOS\CommentBundle\Entity\Comment as BaseComment;
 /**
  * @ORM\Entity
  * @ORM\Table(name="comment")
+ * @ORM\Entity(repositoryClass="Application\Bundle\CoreBundle\Repository\CommentRepository")
  * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  */
 class Comment extends BaseComment

@@ -61,22 +61,30 @@ class UserController extends Controller
     /**
      * User solution action
      *
+     * @param $user
      * @param $solution
      *
      * @internal param int $solution_id
      *
      * @return Response
      *
-     * @Route("/solutions/{id}", name="user_solution_feedback")
+     * @Route("/{username}/solutions/{id}/feedback", name="user_solution_feedback")
+     * @ParamConverter("user", class="ApplicationUserBundle:User", options = {"mapping": {"username": "username"}})
      * @ParamConverter("solution", class="ApplicationCoreBundle:Solution")
      */
-    public function userSolutionFeedbackActions($solution)
+    public function userSolutionFeedbackActions($user, $solution)
     {
+        $em = $this->getDoctrine()->getManager();
+        $commentRepository = $em->getRepository('ApplicationCoreBundle:Comment');
+        $comments = $commentRepository->getThreadComments('s_' . $solution->getId());
+
         return $this->render(
             'ApplicationCoreBundle:User:solution_feedback.html.twig',
             [
-                'solution' => $solution
+                'solution' => $solution,
+                'comments' => $comments,
             ]
         );
     }
 }
+
