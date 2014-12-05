@@ -1,3 +1,13 @@
 #editor {
     height: 300px;
 }
+
+.editor-container {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.editor-container .container,
+.editor-container .panel-body {
+    padding: 0;
+}

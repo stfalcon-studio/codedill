@@ -1,26 +1,42 @@
 {% extends 'ApplicationCoreBundle::layout.html.twig' %}
-{% block content %}
-    <h1>Task: {{ solution.task.title }}</h1>
-    <div>
-        {{ solution.task.description }}
-    </div>
-    <h2>Solution #{{ solution.id }}</h2>
-    {{ include_ace_editor() }}
-    {{ solution.code | ace_editor_read_only | raw }}
-    
-
-    {{ form_start(rating_form, {'action': path('solution_rating_save', {'id': solution.id })}) }}
-        {{ form_rest(rating_form) }}
-    {{ form_end(rating_form) }}
-
-    <div id="fos_comment_thread"></div>
-{% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
     {% javascripts
         '@FOSCommentBundle/Resources/assets/js/comments.js'
         '@ApplicationCoreBundle/Resources/public/js/rating.js'
     %}
         {% include 'ApplicationCoreBundle:Solution:_comment.html.twig' with {'solution': solution, 'asset_url' : asset_url } %}
     {% endjavascripts %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+        '@ApplicationCoreBundle/Resources/public/css/comment.css'
+        '@ApplicationCoreBundle/Resources/public/css/rating.css'
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    <h1>Task {{ solution.task.fullTitle }}</h1>
+    <div id="task-description" class="collapse out">{{ solution.task.description|raw }}</div>
+    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#task-description" aria-expanded="true" aria-controls="task-description">
+      Show description
+    </button>
+
+    <h2>Solution #{{ solution.id }}</h2>
+    <div class="editor-container">
+        {{ include_ace_editor() }}
+        {{ solution.code | ace_editor_read_only | raw }}
+    </div>
+
+
+    {{ form_start(rating_form, {'action': path('solution_rating_save', {'id': solution.id })}) }}
+        {{ form_rest(rating_form) }}
+    {{ form_end(rating_form) }}
+
+    <div id="fos_comment_thread"></div>
 {% endblock %}

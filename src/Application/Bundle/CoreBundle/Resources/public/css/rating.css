@@ -1,0 +1,53 @@
+#solution_rating_rating_value input {
+    display: none;
+}
+
+#solution_rating_rating_value label {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    padding: .3em .6em .3em;
+    font-size: 125%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: .25em;
+    cursor: pointer;
+}
+
+#solution_rating_rating_value label:hover {
+    box-shadow: 0 0 5px #637288;
+}
+
+#solution_rating_rating_value label.active {
+    box-shadow: 0 0 5px #000000;
+    color: #000000;
+}
+
+[for="solution_rating_rating_value_0"] {
+    background-color: #d9534f;
+}
+
+[for="solution_rating_rating_value_1"] {
+    background-color: #f0ad4e;
+}
+
+[for="solution_rating_rating_value_2"] {
+    background-color: #f0ce55;
+}
+
+[for="solution_rating_rating_value_3"] {
+    background-color: #c1d75d;
+}
+
+[for="solution_rating_rating_value_4"] {
+    background-color: #72ca43;
+}
+
+[for="solution_rating_rating_value_5"] {
+    background-color: #2aaa35;
+}
+
