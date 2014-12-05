@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *      name="solutions_ratings",
  *      uniqueConstraints={
  *          @ORM\UniqueConstraint(name="unique_rating_for_solution_from_user", columns={"user_id", "solution_id"})
- *      },
+ *      }
  * )
  * @ORM\Entity(repositoryClass="Application\Bundle\CoreBundle\Repository\SolutionRatingsRepository")
  * @UniqueEntity(

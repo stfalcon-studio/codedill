@@ -6,12 +6,23 @@ use Application\Bundle\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Application\Bundle\CoreBundle\Entity
  *
- * @ORM\Table(name="solutions")
+ * @ORM\Table(
+ *      name="solutions",
+ *      uniqueConstraints={
+ *          @ORM\UniqueConstraint(name="unique_solution_for_task_from_user", columns={"user_id", "task_id"})
+ *      }
+ * )
  * @ORM\Entity(repositoryClass="Application\Bundle\CoreBundle\Repository\SolutionRepository")
+ * @UniqueEntity(
+ *     fields={"user", "task"},
+ *     errorPath="code",
+ *     message="User can add a solution only once. Solution for this task is already added"
+ * )
  */
 class Solution
 {
@@ -30,7 +41,7 @@ class Solution
      * @var User $user
      *
      * @ORM\ManyToOne(targetEntity="Application\Bundle\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     private $user;
 

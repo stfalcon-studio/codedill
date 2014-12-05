@@ -5,6 +5,7 @@ namespace Application\Bundle\CoreBundle\Controller;
 use Application\Bundle\CoreBundle\Entity\Solution;
 use Application\Bundle\CoreBundle\Entity\SolutionRating;
 use Application\Bundle\CoreBundle\Form\SolutionRatingType;
+use Application\Bundle\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
