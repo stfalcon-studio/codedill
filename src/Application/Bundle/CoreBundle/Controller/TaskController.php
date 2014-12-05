@@ -108,7 +108,9 @@ class TaskController extends Controller
      * @return Response
      *
      * @Route("/{id}", name="show_task")
+     *
      * @ParamConverter("task", class="ApplicationCoreBundle:Task")
+     *
      * @Method({"GET"})
      */
     public function showAction(Task $task)
@@ -150,11 +152,16 @@ class TaskController extends Controller
      * @param Task    $task    The task entity
      * @param Request $request The request object
      *
+     * @Route("/{id}/solutions", name="task_solutions_list")
+     *
+     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
+     *
+     * @Method({"GET"})
+     *
+     * @Security("has_role('ROLE_USER')")
+     *
      * @return Response
      *
-     * @Route("/{id}/solutions", name="task_solutions_list")
-     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
-     * @Method({"GET"})
      */
     public function listSolutionsAction(Task $task, Request $request)
     {
@@ -188,11 +195,16 @@ class TaskController extends Controller
      *
      * @param Task $task Task
      *
+     * @Route("/{id}/rating", name="list_solutions_ratings")
+     *
+     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
+     *
+     * @Method({"GET"})
+     *
+     * @Security("has_role('ROLE_USER')")
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/{id}/rating", name="list_solutions_ratings")
-     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
-     * @Method({"GET"})
      */
     public function listSolutionsRatingAction(Task $task)
     {
