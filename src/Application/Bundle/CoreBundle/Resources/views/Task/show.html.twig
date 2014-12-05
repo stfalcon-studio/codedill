@@ -3,9 +3,8 @@
 {% block javascripts %}
     {{ parent() }}
     {% javascripts
-        '@ApplicationCoreBundle/Resources/public/js/rating.js'
-    %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
+    '@ApplicationCoreBundle/Resources/public/js/rating.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
 

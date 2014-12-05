@@ -5,7 +5,7 @@
         {{ solution.task.description }}
     </div>
     <h2>Solution #{{ solution.id }}</h2>
-    {{ (solution.code)|highlightCode|raw }}
+    {{ solution.code|raw }}
 
     {{ form_start(rating_form, {'action': path('solution_rating_save', {'id': solution.id })}) }}
         {{ form_rest(rating_form) }}
