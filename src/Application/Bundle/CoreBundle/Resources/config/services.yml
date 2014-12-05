@@ -1,5 +1,0 @@
-services:
-    twig.extension.highlight_code:
-      class: Application\Bundle\CoreBundle\Twig\HighlightCodeTwigExtension
-      tags:
-          - { name: twig.extension, alias: highlight_code }

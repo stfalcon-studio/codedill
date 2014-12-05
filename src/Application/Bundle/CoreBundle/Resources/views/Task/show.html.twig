@@ -3,9 +3,8 @@
 {% block javascripts %}
     {{ parent() }}
     {% javascripts
-        '@ApplicationCoreBundle/Resources/public/js/rating.js'
-    %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
+    '@ApplicationCoreBundle/Resources/public/js/rating.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
 
@@ -18,11 +17,10 @@
     {% for child in ratings_forms %}
         {% set solution = child.vars.data.solution %}
 
-        #{{ solution.id }}
-        {{ ('<pre lang="php">'~solution.code~'</pre>')|highlightCode|raw }}
+        {{ solution.code }}
 
         {% include '@ApplicationCore/SolutionRating/partial/rating.html.twig' with {
-            'form': child
+        'form': child
         } only %}
     {% else %}
         <div role="alert" class="alert alert-info">
