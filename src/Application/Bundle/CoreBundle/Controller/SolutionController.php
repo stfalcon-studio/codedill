@@ -20,6 +20,38 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class SolutionController extends Controller
 {
     /**
+     * Show action
+     *
+     * @param Solution $solution Solution
+     * @param Request  $request  Request
+     *
+     * @return Response
+     *
+     * @Route("/{id}/show", name="solution_show")
+     * @ParamConverter("solution", class="ApplicationCoreBundle:Solution")
+     */
+    public function showAction(Solution $solution, Request $request)
+    {
+        $solutionRatingRepository = $this->getDoctrine()->getManager()->getRepository('ApplicationCoreBundle:SolutionRating');
+        $solutionRating = $solutionRatingRepository->findBySolution($solution);
+
+        if (!($solutionRating instanceof SolutionRating)) {
+            $solutionRating = new SolutionRating();
+            $solutionRating->setSolution($solution);
+        }
+
+        $ratingForm = $this->createForm(new SolutionRatingType(), $solutionRating);
+
+        return $this->render(
+            'ApplicationCoreBundle:Solution:show.html.twig',
+            [
+                'solution'    => $solution,
+                'rating_form' => $ratingForm->createView()
+            ]
+        );
+    }
+
+    /**
      * @param Solution $solution
      * @param Request  $request
      *
@@ -30,22 +62,20 @@ class SolutionController extends Controller
      */
     public function saveRatingAction(Solution $solution, Request $request)
     {
-        $formName    = 'solution_rating_' . $solution->getId();
+        $formName    = 'solution_rating';
         $form        = $this->createForm(new SolutionRatingType());
         $requestData = $request->get($formName);
 
-        $data = new SolutionRating();
-
-        if ($request->isMethod('post')) {
+        if ($request->isMethod('POST')) {
             $form->submit($requestData);
         }
 
-        $data = $form->getData();
-        $data->setSolution($solution);
-        $data->setUser($this->getUser());
+        $solutionRating = $form->getData();
+        $solutionRating->setSolution($solution);
+        $solutionRating->setUser($this->getUser());
 
         $em = $this->getDoctrine()->getManager();
-        $em->persist($data);
+        $em->persist($solutionRating);
         $em->flush();
 
         return new JsonResponse([

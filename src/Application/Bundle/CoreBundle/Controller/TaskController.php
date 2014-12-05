@@ -58,6 +58,7 @@ class TaskController extends Controller
     {
         $solution = new Solution();
         $solution->setTask($task);
+        $solution->setUser($this->getUser());
 
         $form = $this->createForm(new AddSolutionType(), $solution);
         $form->handleRequest($request);
@@ -137,7 +138,7 @@ class TaskController extends Controller
      *
      * @return Response
      *
-     * @Route("/{id}/solutions", name="list_solution")
+     * @Route("/{id}/solutions", name="task_solutions_list")
      * @ParamConverter("task", class="ApplicationCoreBundle:Task")
      * @Method({"GET"})
      */

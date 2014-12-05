@@ -13,20 +13,5 @@
     <h1>{{ task.title }} (<a href="{{ path('tasks_list') }}"><-back</a>)</h1>
     <div class="well">{{ task.description }}</div>
     <a class="btn-success btn" href="{{ path('add_solution', {'id' : task.id}) }}">Add solution</a>
-
-    <h2>Solutions</h2>
-    {% for child in ratings_forms %}
-        {% set solution = child.vars.data.solution %}
-
-        #{{ solution.id }}
-        {{ ('<pre lang="php">'~solution.code~'</pre>')|highlightCode|raw }}
-
-        {% include '@ApplicationCore/SolutionRating/partial/rating.html.twig' with {
-            'form': child
-        } only %}
-    {% else %}
-        <div role="alert" class="alert alert-info">
-            <p>Not found solutions.</p>
-        </div>
-    {% endfor %}
+    <a class="btn btn-info" href="{{ path('task_solutions_list', {'id': task.id}) }}">Review solutions</a>
 {% endblock %}
