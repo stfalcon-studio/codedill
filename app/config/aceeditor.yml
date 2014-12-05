@@ -1,0 +1,5 @@
+norzechowicz_ace_editor:
+    base_path: "bundles/norzechowiczaceeditor/ace"
+    autoinclude: true
+    debug: "%kernel.debug%"
+    noconflict: true

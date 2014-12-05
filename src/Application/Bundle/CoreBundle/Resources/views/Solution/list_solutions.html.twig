@@ -4,9 +4,11 @@
     <div class="col-md-9" role="main">
         {% for solution in solutions %}
             <div class="bs-callout bs-callout-info">
-                <h1 class="page-header" id="solution-{{ solution.id }}">Solution #{{ solution.id }}</h1>
+                <h1 class="page-header" id="solution-{{ solution.id }}">
+                    Solution #{{ solution.id }} <a class="btn btn-info btn-xs" href="{{ path('solution_show', {'id': solution.id}) }}">Show solution</a>
+                </h1>
 
-                <pre>{{ solution.code }}</pre>
+                {#<pre>{{ solution.code }}</pre>#}
             </div>
         {% endfor %}
     </div>

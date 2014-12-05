@@ -2,103 +2,84 @@
 
 namespace Application\Bundle\CoreBundle\Controller;
 
-use Application\Bundle\CoreBundle\Entity\Task;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Application\Bundle\CoreBundle\Entity\Solution;
+use Application\Bundle\CoreBundle\Entity\SolutionRating;
+use Application\Bundle\CoreBundle\Form\SolutionRatingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * TaskController
+ * SolutionController
  *
- * @Route("/tasks")
+ * @Route("/solutions")
  */
 class SolutionController extends Controller
 {
     /**
-     * Add solution to task
+     * Show action
      *
-     * @param Task $task Task
-     *
-     * @return Response
-     *
-     * @Route("/{id}/add-solution", name="add_solution")
-     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
-     * @Method({"GET"})
-     */
-    public function addSolutionAction(Task $task)
-    {
-        return $this->render(
-            'ApplicationCoreBundle:Task:add_solution.html.twig',
-            [
-                'task' => $task
-            ]
-        );
-    }
-
-    /**
-     * List of solutions to task
-     *
-     * @param Task    $task    The task entity
-     * @param Request $request The request object
+     * @param Solution $solution Solution
+     * @param Request  $request  Request
      *
      * @return Response
      *
-     * @Route("/{id}/solutions", name="list_solution")
-     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
-     * @Method({"GET"})
+     * @Route("/{id}/show", name="solution_show")
+     * @ParamConverter("solution", class="ApplicationCoreBundle:Solution")
      */
-    public function listSolutionsAction(Task $task, Request $request)
+    public function showAction(Solution $solution, Request $request)
     {
-        $user = $this->getUser();
+        $solutionRatingRepository = $this->getDoctrine()->getManager()->getRepository('ApplicationCoreBundle:SolutionRating');
+        $solutionRating = $solutionRatingRepository->findBySolution($solution);
 
-        $solutionsRepository  = $this->getDoctrine()->getManager()->getRepository('ApplicationCoreBundle:Solution');
-        $userSolutionsForTask = $solutionsRepository->findBy(
-            [
-                'user' => $user,
-                'task' => $task
-            ]
-        );
-
-        if (empty($userSolutionsForTask)) {
-            throw new AccessDeniedHttpException('You must first post your solution');
+        if (!($solutionRating instanceof SolutionRating)) {
+            $solutionRating = new SolutionRating();
+            $solutionRating->setSolution($solution);
         }
 
-        $taskSolutions = $solutionsRepository->findBy(['task' => $task], ['createdAt' => 'DESC']);
+        $ratingForm = $this->createForm(new SolutionRatingType(), $solutionRating);
 
         return $this->render(
-            'ApplicationCoreBundle:Solution:list_solutions.html.twig',
+            'ApplicationCoreBundle:Solution:show.html.twig',
             [
-                'solutions' => $taskSolutions
+                'solution'    => $solution,
+                'rating_form' => $ratingForm->createView()
             ]
         );
     }
 
     /**
-     * List of solutions ratings to task
+     * @param Solution $solution
+     * @param Request  $request
      *
-     * @param Task $task Task
+     * @return Response
      *
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("/{id}/rating", name="list_solutions_ratings")
-     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
-     * @Method({"GET"})
+     * @Route("/{id}/save-rating", name="solution_rating_save")
+     * @ParamConverter("solution", class="ApplicationCoreBundle:Solution")
      */
-    public function listSolutionsRatingAction(Task $task)
+    public function saveRatingAction(Solution $solution, Request $request)
     {
-        $solutionsRatingsRepository = $this->getDoctrine()->getManager()->getRepository('ApplicationCoreBundle:SolutionRating');
-        $solutionsRatings = $solutionsRatingsRepository->findSolutionRatingsByTask($task);
+        $formName    = 'solution_rating';
+        $form        = $this->createForm(new SolutionRatingType());
+        $requestData = $request->get($formName);
 
+        if ($request->isMethod('POST')) {
+            $form->submit($requestData);
+        }
 
-        return $this->render(
-            'ApplicationCoreBundle:Solution:list_solutions_ratings.html.twig',
-            [
-                'ratings' => $solutionsRatings
-            ]
-        );
+        $solutionRating = $form->getData();
+        $solutionRating->setSolution($solution);
+        $solutionRating->setUser($this->getUser());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($solutionRating);
+        $em->flush();
+
+        return new JsonResponse([
+            'ok' => true
+        ]);
     }
 }
