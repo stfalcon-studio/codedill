@@ -41,7 +41,7 @@ class LoadSolutionData extends AbstractFixture implements DependentFixtureInterf
         $user2 = $this->getReference('user_2');
         $user3 = $this->getReference('user_3');
 
-        $solution = (new Solution())->setTask($task1)
+        $solution1 = (new Solution())->setTask($task1)
                                     ->setCode(<<<'DESC'
     /**
      * Preliminary checks that can skip some fake arrays of words
@@ -58,11 +58,11 @@ class LoadSolutionData extends AbstractFixture implements DependentFixtureInterf
     }
 DESC
                             );
-        $this->addReference('solution-1', $solution);
-        $solution->setUser($user1);
-        $manager->persist($solution);
+        $this->addReference('solution-1', $solution1);
+        $solution1->setUser($user1);
+        $manager->persist($solution1);
 
-        $solution = (new Solution())->setTask($task1)
+        $solution2 = (new Solution())->setTask($task1)
                                     ->setCode(<<<'DESC'
     /**
      * Check allowed length for words
@@ -87,12 +87,12 @@ DESC
     }
 DESC
                             );
-        $this->addReference('solution-2', $solution);
-        $solution->setUser($user2);
+        $this->addReference('solution-2', $solution2);
+        $solution2->setUser($user2);
 
-        $manager->persist($solution);
+        $manager->persist($solution2);
 
-        $solution = (new Solution())->setTask($task2)
+        $solution3 = (new Solution())->setTask($task2)
                                     ->setCode(<<<'DESC'
     /**
      * Check if crossword could be made from array of words
@@ -125,11 +125,11 @@ DESC
     }
 DESC
                                     );
-        $this->addReference('solution-3', $solution);
-        $solution->setUser($user3);
-        $manager->persist($solution);
+        $this->addReference('solution-3', $solution3);
+        $solution3->setUser($user3);
+        $manager->persist($solution3);
 
-        $solution = (new Solution())->setTask($task2)
+        $solution4 = (new Solution())->setTask($task2)
                                     ->setCode(<<<'DESC'
     /**
      * Check first and last letters for compatibility
@@ -159,10 +159,10 @@ DESC
     }
 DESC
                                     );
-        $this->addReference('solution-4', $solution);
-        $solution->setUser($user1);
+        $this->addReference('solution-4', $solution4);
+        $solution4->setUser($user1);
 
-        $manager->persist($solution);
+        $manager->persist($solution4);
 
         $manager->flush();
     }
