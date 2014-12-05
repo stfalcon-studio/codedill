@@ -105,4 +105,30 @@ class SolutionController extends Controller
             'error' => $form->getErrors()
         ]);
     }
+
+    /**
+     * Solutions action
+     *
+     * @param User    $user    User
+     * @param Request $request Request
+     *
+     * @return Response
+     *
+     * @Route("/{username}/solutions", name="user_solutions_list")
+     * @ParamConverter("user", class="ApplicationUserBundle:User")
+     */
+    public function userSolutionsActions(User $user, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $solutionRepository = $em->getRepository('ApplicationCoreBundle:Solution');
+        $solutions = $solutionRepository->findBy(['user' => $user]);
+
+        return $this->render(
+            'ApplicationUserBundle:User:solutions.html.twig',
+            [
+                'user'      => $user,
+                'solutions' => $solutions
+            ]
+        );
+    }
 }

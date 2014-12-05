@@ -1,0 +1,13 @@
+{% extends 'ApplicationCoreBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="col-md-9" role="main">
+        <ul>
+        {% for solution in solutions %}
+            <li>
+                <a href="{{ solution.id }}">Solution to the task {{ solution.task.title }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock content %}
