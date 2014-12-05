@@ -161,6 +161,20 @@ class Task
     }
 
     /**
+     * Get full title
+     *
+     * @return string Title
+     */
+    public function getFullTitle()
+    {
+        return sprintf(
+            '#%s: %s',
+            $this->id,
+            $this->title
+        );
+    }
+
+    /**
      * Set description
      *
      * @param string $description description

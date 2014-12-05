@@ -1,7 +1,8 @@
 {% extends 'ApplicationCoreBundle:Task:index.html.twig' %}
 
 {% block content %}
-    <h1>{{ task.title }} (<a href="{{ path('tasks_list') }}"><-back</a>)</h1>
+    ← <a href="{{ path('tasks_list') }}">all tasks</a>
+    <h1>{{ task.fullTitle }}</h1>
     <div class="well">{{ task.description }}</div>
 
     {{ form_start(form) }}
