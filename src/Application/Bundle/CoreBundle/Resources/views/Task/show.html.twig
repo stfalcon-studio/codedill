@@ -14,7 +14,9 @@
     <div class="well">{{ task.description|raw }}</div>
 
     {% if (is_user_solution) %}
-        <a class="btn-success btn" href="#">My solution (todo)</a>
+        {% if solution is not null %}
+            <a class="btn-success btn" href="{{ path('user_solution_feedback', {'id' : solution.id, 'username': app.user.username}) }}">My solution</a>
+        {% endif %}
     {% else %}
         <a class="btn-success btn" href="{{ path('add_solution', {'id' : task.id}) }}">Add solution</a>
     {% endif %}
