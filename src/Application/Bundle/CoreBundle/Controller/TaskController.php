@@ -163,6 +163,7 @@ class TaskController extends Controller
         return $this->render(
             'ApplicationCoreBundle:Solution:list_solutions.html.twig',
             [
+                'task' => $task,
                 'solutions' => $taskSolutions
             ]
         );
