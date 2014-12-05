@@ -38,8 +38,8 @@ class LoadSolutionData extends AbstractFixture implements DependentFixtureInterf
         $task1 = $this->getReference('task-1');
         $task2 = $this->getReference('task-2');
         $user1 = $this->getReference('user_1');
-        $user2 = $this->getReference('user_1');
-        $user3 = $this->getReference('user_1');
+        $user2 = $this->getReference('user_2');
+        $user3 = $this->getReference('user_3');
 
         $solution = (new Solution())->setTask($task1)
                                     ->setCode(<<<'DESC'
