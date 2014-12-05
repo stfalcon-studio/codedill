@@ -6,7 +6,7 @@
         <ul class="list-unstyled">
         {% for solution in solutions %}
             <li>
-                <a href="{{ path('user_solution_feedback', {'id' : solution.id}) }}">{{ solution.task.title }}
+                <a href="{{ path('user_solution_feedback', {'id' : solution.id, 'username': user }) }}">{{ solution.task.title }}
                     {% set comments_num = 0 %}
                     {% if solution_comments_stats['s_' ~ solution.id] is defined %}
                         {% set comments_num = solution_comments_stats['s_' ~ solution.id] %}
