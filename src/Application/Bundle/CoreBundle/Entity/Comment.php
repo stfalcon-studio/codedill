@@ -6,13 +6,15 @@ namespace Application\Bundle\CoreBundle\Entity;
 use Application\Bundle\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\CommentBundle\Entity\Comment as BaseComment;
+use FOS\CommentBundle\Model\SignedCommentInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="comment")
  * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  */
-class Comment extends BaseComment
+class Comment extends BaseComment implements SignedCommentInterface
 {
     /**
      * @ORM\Id
@@ -30,30 +32,40 @@ class Comment extends BaseComment
     protected $thread;
 
     /**
-     * @var User $user
+     * Author of the comment
      *
      * @ORM\ManyToOne(targetEntity="Application\Bundle\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @var User
      */
-    protected $user;
+    protected $author;
 
     /**
      * @return User
      */
-    public function getUser()
+    public function getAuthor()
     {
-        return $this->user;
+        return $this->author;
     }
 
     /**
-     * @param User $user
-     *
-     * @return Comment
+     * @return string
      */
-    public function setUser($user)
+    public function getAuthorName()
     {
-        $this->user = $user;
+        if (null === $this->getAuthor()) {
+            return 'Anonymous';
+        }
 
-        return $this;
+        return $this->getAuthor()->getUsername();
+    }
+
+    /**
+     * Sets the author of the Comment
+     *
+     * @param UserInterface $author
+     */
+    public function setAuthor(UserInterface $author)
+    {
+        $this->author = $author;
     }
 }
