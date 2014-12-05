@@ -12,6 +12,11 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class AddSolutionType extends AbstractType
 {
     /**
+     * @var array
+     */
+    private $params = array();
+
+    /**
      * Build form
      *
      * @param FormBuilderInterface $builder Builder
@@ -19,21 +24,25 @@ class AddSolutionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $defaultParams = array(
+            'wrapper_attr' => array(), // aceeditor wrapper html attributes.
+            'width' => 1200,
+            'height' => 300,
+            'font_size' => 14,
+            'mode' => 'ace/mode/html', // every single default mode must have ace/mode/* prefix
+            'theme' => 'ace/theme/github', // every single default theme must have ace/theme/* prefix
+            'tab_size' => null,
+            'read_only' => null,
+            'use_soft_tabs' => null,
+            'use_wrap_mode' => null,
+            'show_print_margin' => null,
+            'highlight_active_line' => null
+        );
+
+        $defaultParams = array_merge($defaultParams, $this->params);
+
         $builder
-            ->add('code', 'ace_editor', array(
-                'wrapper_attr' => array(), // aceeditor wrapper html attributes.
-                'width' => 1200,
-                'height' => 300,
-                'font_size' => 14,
-                'mode' => 'ace/mode/html', // every single default mode must have ace/mode/* prefix
-                'theme' => 'ace/theme/github', // every single default theme must have ace/theme/* prefix
-                'tab_size' => null,
-                'read_only' => null,
-                'use_soft_tabs' => null,
-                'use_wrap_mode' => null,
-                'show_print_margin' => null,
-                'highlight_active_line' => null
-            ));
+            ->add('code', 'ace_editor', $defaultParams);
     }
 
     /**
@@ -56,5 +65,21 @@ class AddSolutionType extends AbstractType
         $resolver->setDefaults([
             'data_class' => 'Application\Bundle\CoreBundle\Entity\Solution',
         ]);
+    }
+
+    /**
+     * @return array
+     */
+    public function getParams()
+    {
+        return $this->params;
+    }
+
+    /**
+     * @param array $params
+     */
+    public function setParams($params)
+    {
+        $this->params = $params;
     }
 }
