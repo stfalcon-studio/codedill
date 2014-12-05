@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * TaskController
@@ -48,11 +49,16 @@ class TaskController extends Controller
      * @param Task    $task    Task
      * @param Request $request Request
      *
+     * @Route("/{id}/add-solution", name="add_solution")
+     *
+     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
+     *
+     * @Method({"GET", "POST"})
+     *
+     * @Security("has_role('ROLE_USER')")
+     *
      * @return Response
      *
-     * @Route("/{id}/add-solution", name="add_solution")
-     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
-     * @Method({"GET", "POST"})
      */
     public function addSolutionAction(Task $task, Request $request)
     {
