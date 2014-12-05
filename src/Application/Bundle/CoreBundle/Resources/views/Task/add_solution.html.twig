@@ -1,19 +1,29 @@
 {% extends 'ApplicationCoreBundle:Task:index.html.twig' %}
 
 {% block content %}
-    <h1>{{ task.title }} (<a href="{{ path('tasks_list') }}"><-back</a>)</h1>
-    <div class="well">{{ task.description }}</div>
+    ← <a href="{{ path('tasks_list') }}">all tasks</a>
 
-    {{ form_start(form) }}
-    {{ form_errors(form) }}
+    <h1>{{ task.fullTitle }}</h1>
+    <div id="task-description" class="collapse out">{{ task.description|raw }}</div>
+    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#task-description" aria-expanded="true" aria-controls="task-description">
+      Show description
+    </button>
 
-    <div class="form-group">
-        {{ form_row(form.code, { 'attr': {'class': 'form-control', 'rows' : 10} }) }}
+    <br/><br/>
+
+    <div class="form-container">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <div class="form-group">
+            {{ form_row(form.code, { 'attr': {'class': 'form-control', 'rows' : 10} }) }}
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn-success btn">Send</button>
+        </div>
+
+        {{ form_end(form) }}
     </div>
 
-    <div class="form-group">
-        <button type="submit" class="btn-success btn">Send</button>
-    </div>
-
-    {{ form_end(form) }}
 {% endblock %}
