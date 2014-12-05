@@ -7,6 +7,7 @@ use Application\Bundle\CoreBundle\Entity\SolutionRating;
 use Application\Bundle\CoreBundle\Form\SolutionRatingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,8 +33,9 @@ class SolutionController extends Controller
      */
     public function showAction(Solution $solution, Request $request)
     {
-        $solutionRatingRepository = $this->getDoctrine()->getManager()->getRepository('ApplicationCoreBundle:SolutionRating');
-        $solutionRating = $solutionRatingRepository->findBySolution($solution);
+        $solutionRatingRepository = $this->getDoctrine()
+                                         ->getRepository('ApplicationCoreBundle:SolutionRating');
+        $solutionRating = $solutionRatingRepository->findOneBySolution($solution);
 
         if (!($solutionRating instanceof SolutionRating)) {
             $solutionRating = new SolutionRating();
@@ -58,28 +60,49 @@ class SolutionController extends Controller
      * @return Response
      *
      * @Route("/{id}/save-rating", name="solution_rating_save")
+     * @Method("POST")
      * @ParamConverter("solution", class="ApplicationCoreBundle:Solution")
      */
     public function saveRatingAction(Solution $solution, Request $request)
     {
-        $formName    = 'solution_rating';
-        $form        = $this->createForm(new SolutionRatingType());
-        $requestData = $request->get($formName);
+        $form = $this->createForm(new SolutionRatingType());
 
-        if ($request->isMethod('POST')) {
-            $form->submit($requestData);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $solutionRatingRepository = $this->getDoctrine()->getRepository('ApplicationCoreBundle:SolutionRating');
+            /** @var \Application\Bundle\CoreBundle\Entity\SolutionRating $solutionRating */
+            $solutionRating           = $solutionRatingRepository->findOneBy([
+                'solution' => $solution,
+                'user'     => $this->getUser()
+            ]);
+
+            if (!$solutionRating) {
+                $solutionRating = (new SolutionRating())->setSolution($solution)
+                                                        ->setUser($this->getUser());
+            }
+
+            $solutionRating->setRatingValue($form->getData()->getRatingValue());
+
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($solutionRating);
+                $em->flush();
+            } catch (\Exception $e) {
+                return new JsonResponse([
+                    'ok'    => false,
+                    'error' => $e->getMessage()
+                ]);
+            }
+
+            return new JsonResponse([
+                'ok' => true
+            ]);
         }
 
-        $solutionRating = $form->getData();
-        $solutionRating->setSolution($solution);
-        $solutionRating->setUser($this->getUser());
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($solutionRating);
-        $em->flush();
-
         return new JsonResponse([
-            'ok' => true
+            'ok'    => false,
+            'error' => $form->getErrors()
         ]);
     }
 }
