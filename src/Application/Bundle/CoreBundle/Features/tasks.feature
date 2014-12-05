@@ -5,5 +5,5 @@ Feature: Store tasks page
 
   Scenario: Viewing the tasks list
     Given I am on "/tasks"
-    Then  I should see "Game"
-    And   I should see "Crossword"
+    Then  I should see text matching "Game"
+    And   I should see text matching "Crossword"
