@@ -2,7 +2,12 @@
 
 {% block content %}
 
-    <h1>Homepage</h1>
-    <a href="{{ path('tasks_list') }}">Task list</a>
+    <div class="jumbotron">
+        <h1>CodeDill</h1>
+
+        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad consequuntur cupiditate dolorem doloremque dolorum earum enim illo iure, laudantium, perspiciatis possimus quaerat quia quod repellat repudiandae sint tempora temporibus veritatis!</p>
+
+        <p><a class="btn btn-lg btn-success" href="{{ path('tasks_list') }}" role="button">Go to an adventure!</a></p>
+    </div>
 
 {% endblock content %}

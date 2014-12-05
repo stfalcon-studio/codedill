@@ -11,3 +11,4 @@
 /composer.phar
 /web/bower/components/*
 /web/bower/cache/*
+behat.yml
