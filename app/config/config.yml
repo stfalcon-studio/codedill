@@ -1,6 +1,8 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: doctrine.yml }
+    - { resource: oauth.yml }
 
 framework:
     #esi:             ~
@@ -33,8 +35,9 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
-    #java: /usr/bin/java
+    bundles:
+        - FOSCommentBundle
+        - ApplicationCoreBundle
     filters:
         cssrewrite: ~
         #closure:
@@ -42,26 +45,7 @@ assetic:
         #yui_css:
         #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
 
-# Doctrine Configuration
-doctrine:
-    dbal:
-        driver:   "%database_driver%"
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
-        charset:  UTF8
-        # if using pdo_sqlite as your database driver:
-        #   1. add the path in parameters.yml
-        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        #   2. Uncomment database_path in parameters.yml.dist
-        #   3. Uncomment next line:
-        #     path:     "%database_path%"
 
-    orm:
-        auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -71,12 +55,22 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+sp_bower:
+    bundles:
+        ApplicationCoreBundle:
+            config_dir: Resources/config/bower
+            asset_dir: %kernel.root_dir%/../web/bower/components
+            cache:
+                id: ~
+                directory: %kernel.root_dir%/../web/bower/cache
 fos_comment:
     db_driver: orm
     class:
         model:
-            comment: MyProject\MyBundle\Entity\Comment
-            thread: MyProject\MyBundle\Entity\Thread
+            comment:  Application\Bundle\CoreBundle\Entity\Comment
+            thread:  Application\Bundle\CoreBundle\Entity\Thread
 
-assetic:
-    bundles: [ "FOSCommentBundle" ]
+sensio_framework_extra:
+   request:
+       converters: true
+       auto_convert: false

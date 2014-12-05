@@ -1,0 +1,24 @@
+{% extends 'ApplicationCoreBundle::layout.html.twig' %}
+{% block content %}
+    <h1>Task: {{ solution.task.title }}</h1>
+    <div>
+        {{ solution.task.description }}
+    </div>
+    <h2>Solution #{{ solution.id }}</h2>
+    {{ (solution.code)|highlightCode|raw }}
+
+    {{ form_start(rating_form, {'action': path('solution_rating_save', {'id': solution.id })}) }}
+        {{ form_rest(rating_form) }}
+    {{ form_end(rating_form) }}
+
+    <div id="fos_comment_thread"></div>
+{% endblock %}
+
+{% block javascripts %}
+    {% javascripts
+        '@FOSCommentBundle/Resources/assets/js/comments.js'
+        '@ApplicationCoreBundle/Resources/public/js/rating.js'
+    %}
+        {% include 'ApplicationCoreBundle:Solution:_comment.html.twig' with {'solution': solution, 'asset_url' : asset_url } %}
+    {% endjavascripts %}
+{% endblock %}

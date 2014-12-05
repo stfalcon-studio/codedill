@@ -1,8 +1,14 @@
-application_comment:
-    resource: "@ApplicationCommentBundle/Resources/config/routing.yml"
+application_user:
+    resource: "@ApplicationUserBundle/Resources/config/routing.yml"
     prefix:   /
 
 application_core:
-    resource: "@ApplicationCoreBundle/Resources/config/routing.yml"
-    prefix:   /
+    resource: "@ApplicationCoreBundle/Controller/"
+    type: annotation
+    prefix: /
 
+fos_comment_api:
+    type: rest
+    resource: "@FOSCommentBundle/Resources/config/routing.yml"
+    prefix: /api
+    defaults: { _format: html }

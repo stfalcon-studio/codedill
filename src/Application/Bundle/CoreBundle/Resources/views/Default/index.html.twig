@@ -1,1 +1,8 @@
-<h1>( ͡° ͜ʖ ͡°)  Привіт УКРОПи!</h1>
+{% extends 'ApplicationCoreBundle::layout.html.twig' %}
+
+{% block content %}
+
+    <h1>Homepage</h1>
+    <a href="{{ path('tasks_list') }}">Task list</a>
+
+{% endblock content %}
