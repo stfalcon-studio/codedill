@@ -18,3 +18,28 @@
 .fos_comment_submit {
     margin-top: 10px;
 }
+
+.fos_comment_comment_replies {
+    margin-left: 40px;
+}
+
+.fos_comment_comment_body {
+    font-size: 1.2em;
+}
+
+.fos_comment_comment_show {
+    margin-top: 20px;
+    max-width: 600px;
+}
+
+.fos_comment_comment_metas {
+    color: #898989;
+}
+
+.fos_comment_comment_body {
+    margin-top: 5px;
+}
+
+.fos_comment_comment_reply {
+    margin-top: 5px;
+}
