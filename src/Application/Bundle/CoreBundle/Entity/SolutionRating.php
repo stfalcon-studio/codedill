@@ -5,16 +5,26 @@ namespace Application\Bundle\CoreBundle\Entity;
 use Application\Bundle\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Application\Bundle\CoreBundle\Entity
  *
- * @ORM\Table(name="solutions_ratings")
+ * @ORM\Table(
+ *      name="solutions_ratings",
+ *      uniqueConstraints={
+ *          @ORM\UniqueConstraint(name="unique_rating_for_solution_from_user", columns={"user_id", "solution_id"})
+ *      },
+ * )
  * @ORM\Entity(repositoryClass="Application\Bundle\CoreBundle\Repository\SolutionRatingsRepository")
+ * @UniqueEntity(
+ *     fields={"user", "solution"},
+ *     errorPath="solution",
+ *     message="User can rate the solution only once. You already rated it"
+ * )
  */
 class SolutionRating
 {
-
     /**
      * @var int $id
      *
@@ -49,6 +59,7 @@ class SolutionRating
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
@@ -80,10 +91,14 @@ class SolutionRating
 
     /**
      * @param int $ratingValue
+     *
+     * @return $this
      */
     public function setRatingValue($ratingValue)
     {
         $this->ratingValue = $ratingValue;
+
+        return $this;
     }
 
     /**
@@ -96,10 +111,14 @@ class SolutionRating
 
     /**
      * @param Solution $solution
+     *
+     * @return $this
      */
     public function setSolution($solution)
     {
         $this->solution = $solution;
+
+        return $this;
     }
 
     /**
@@ -112,10 +131,14 @@ class SolutionRating
 
     /**
      * @param User $user
+     *
+     * @return $this
      */
     public function setUser($user)
     {
         $this->user = $user;
+
+        return $this;
     }
 
     /**
