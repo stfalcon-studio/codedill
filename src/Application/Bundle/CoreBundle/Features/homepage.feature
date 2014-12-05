@@ -8,3 +8,7 @@ Feature: Store homepage
     Given I am on the homepage
     Then  I should be on the homepage
     And   I should see "Homepage"
+
+  Scenario: Should see link for login
+    Given I am on the homepage
+    Then  I should see "Войти"
