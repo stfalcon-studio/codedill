@@ -7,7 +7,7 @@ Feature: Store homepage
   Scenario: Viewing the homepage at website root
     Given I am on the homepage
     Then  I should be on the homepage
-    And   I should see "Homepage"
+    And   I should see "CodeDill"
 
   Scenario: Should see link for login
     Given I am on the homepage
