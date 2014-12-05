@@ -15,7 +15,7 @@ class WidgetController extends Controller
     public function userToolbarAction()
     {
         if ($this->get('security.context')->isGranted('ROLE_USER')) {
-            $user = $this->get('security.context')->getToken()->getUser();
+            $user = $this->getUser();
 
             return $this->render(
                 '@ApplicationUser/Widget/user-toolbar/_authorized.html.twig',
