@@ -143,12 +143,15 @@ class TaskController extends Controller
                 ->createView();
         }
 
+        $solution = $solutionRepository->getSolutionByUserAndTask($task, $this->getUser());
+
         return $this->render(
             'ApplicationCoreBundle:Task:show.html.twig',
             [
                 'task'             => $task,
                 'ratings_forms'    => $ratingsForms,
-                'is_user_solution' => $this->checkIfUserSolutionForTaskExists($this->getUser(), $task)
+                'is_user_solution' => (is_null($solution)) ? false : true,
+                'solution'         => $solution
             ]
         );
     }
@@ -237,8 +240,8 @@ class TaskController extends Controller
      */
     public function checkIfUserSolutionForTaskExists($user, $task)
     {
-        $solutionRepository = $this->getDoctrine()->getManager()->getRepository('ApplicationCoreBundle:Solution');
-        $result = $solutionRepository->findOneBy(['task' => $task, 'user' => $user]);
+        $solutionRepository = $this->getDoctrine()->getRepository('ApplicationCoreBundle:Solution');
+        $result = $solutionRepository->getSolutionByUserAndTask($task, $user);
 
         return (is_null($result)) ? false : true;
     }
