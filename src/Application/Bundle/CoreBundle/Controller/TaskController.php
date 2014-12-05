@@ -82,6 +82,11 @@ class TaskController extends Controller
             );
 
             return $this->redirect($this->generateUrl('show_task', ['id' => $task->getId()]));
+        } else {
+            $this->get('session')->getFlashBag()->add(
+                'error',
+                'Form is invalid'
+            );
         }
 
         return $this->render(
