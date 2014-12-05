@@ -22,3 +22,4 @@ default:
             bundle: ApplicationCoreBundle
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
+                - Application\Bundle\CoreBundle\Behat\DefaultContext

@@ -9,8 +9,10 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{{ task.title }} (<a href="{{ path('tasks_list') }}"><-back</a>)</h1>
-    <div class="well">{{ task.description }}</div>
+    ← <a href="{{ path('tasks_list') }}">all tasks</a>
+    <h1>{{ task.fullTitle }}</h1>
+    <div class="well">{{ task.description|raw }}</div>
     <a class="btn-success btn" href="{{ path('add_solution', {'id' : task.id}) }}">Add solution</a>
+    <a class="btn-success btn" href="#">My solution (todo)</a>
     <a class="btn btn-info" href="{{ path('task_solutions_list', {'id': task.id}) }}">Review solutions</a>
 {% endblock %}

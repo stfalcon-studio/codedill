@@ -60,7 +60,7 @@ class TaskController extends Controller
         $solution->setTask($task);
         $solution->setUser($this->getUser());
 
-        $form = $this->createForm(new AddSolutionType(), $solution);
+        $form = $this->createForm($this->get('app.add_solution_type.form'), $solution);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -163,6 +163,7 @@ class TaskController extends Controller
         return $this->render(
             'ApplicationCoreBundle:Solution:list_solutions.html.twig',
             [
+                'task' => $task,
                 'solutions' => $taskSolutions
             ]
         );

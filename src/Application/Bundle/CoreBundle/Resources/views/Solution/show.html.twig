@@ -5,7 +5,9 @@
         {{ solution.task.description }}
     </div>
     <h2>Solution #{{ solution.id }}</h2>
-    {{ solution.code|raw }}
+    {{ include_ace_editor() }}
+    {{ solution.code | ace_editor_read_only | raw }}
+    
 
     {{ form_start(rating_form, {'action': path('solution_rating_save', {'id': solution.id })}) }}
         {{ form_rest(rating_form) }}

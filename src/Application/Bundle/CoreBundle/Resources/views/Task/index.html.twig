@@ -4,9 +4,9 @@
     <div class="col-md-9" role="main">
         {% for task in tasks %}
             <div class="bs-callout bs-callout-info">
-                <h1 class="page-header" id="task-{{ task.id }}"><a href="{{ path('show_task', {'id' : task.id}) }}">{{ task.title }}</a></h1>
+                <h1 class="page-header" id="task-{{ task.id }}"><a href="{{ path('show_task', {'id' : task.id}) }}">{{ task.fullTitle }}</a></h1>
 
-                <p>{{ task.description }}</p>
+                <p>{{ task.description|truncate(300, true)|raw }}</p>
             </div>
         {% else %}
             <div role="alert" class="alert alert-info">
@@ -18,7 +18,7 @@
         <div class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
             <ul class="nav bs-docs-sidenav">
                 {% for task in tasks %}
-                    <li><a href="#task-{{ task.id }}">{{ task.title }}</a></li>
+                    <li><a href="#task-{{ task.id }}">{{ task.fullTitle }}</a></li>
                 {% endfor %}
             </ul>
         </div>

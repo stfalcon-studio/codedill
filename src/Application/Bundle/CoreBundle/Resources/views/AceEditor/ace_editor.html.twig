@@ -1,0 +1,18 @@
+{% stylesheets 'bundles/applicationcore/css/editor.css' filter='cssrewrite' %}
+<link rel="stylesheet" href="{{ asset_url }}"/>
+{% endstylesheets %}
+<div class="container">
+
+    <div class="panel-body">
+        <div id="editor">
+            {{ code }}
+        </div>
+    </div>
+</div>
+<script type="application/javascript">
+    var editor = ace.edit("editor");
+    editor.setReadOnly({{ read_only }});
+    editor.setTheme("{{ theme }}");
+    editor.setFontSize({{ font_size }});
+    editor.getSession().setMode("{{ mode }}");
+</script>
