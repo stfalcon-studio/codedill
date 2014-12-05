@@ -12,7 +12,12 @@
     ← <a href="{{ path('tasks_list') }}">all tasks</a>
     <h1>{{ task.fullTitle }}</h1>
     <div class="well">{{ task.description|raw }}</div>
-    <a class="btn-success btn" href="{{ path('add_solution', {'id' : task.id}) }}">Add solution</a>
-    <a class="btn-success btn" href="#">My solution (todo)</a>
+
+    {% if (is_user_solution) %}
+        <a class="btn-success btn" href="#">My solution (todo)</a>
+    {% else %}
+        <a class="btn-success btn" href="{{ path('add_solution', {'id' : task.id}) }}">Add solution</a>
+    {% endif %}
+
     <a class="btn btn-info" href="{{ path('task_solutions_list', {'id': task.id}) }}">Review solutions</a>
 {% endblock %}

@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Application\Bundle\UserBundle\Entity\User;
 
 /**
  * TaskController
@@ -62,9 +63,15 @@ class TaskController extends Controller
      */
     public function addSolutionAction(Task $task, Request $request)
     {
+        $user = $this->getUser();
+
+        if ($this->checkIfUserSolutionForTaskExists($user, $task)) {
+            throw $this->createNotFoundException('Error!Solution must be unique.');
+        }
+
         $solution = new Solution();
         $solution->setTask($task);
-        $solution->setUser($this->getUser());
+        $solution->setUser($user);
 
         $form = $this->createForm($this->get('app.add_solution_type.form'), $solution);
         $form->handleRequest($request);
@@ -130,8 +137,9 @@ class TaskController extends Controller
         return $this->render(
             'ApplicationCoreBundle:Task:show.html.twig',
             [
-                'task'          => $task,
-                'ratings_forms' => $ratingsForms
+                'task'             => $task,
+                'ratings_forms'    => $ratingsForms,
+                'is_user_solution' => $this->checkIfUserSolutionForTaskExists($this->getUser(), $task)
             ]
         );
     }
@@ -198,5 +206,21 @@ class TaskController extends Controller
                 'ratings' => $solutionsRatings
             ]
         );
+    }
+
+    /**
+     * Check unique solution for user
+     *
+     * @param User $user
+     * @param Task $task
+     *
+     * @return bool
+     */
+    public function checkIfUserSolutionForTaskExists($user, $task)
+    {
+        $solutionRepository = $this->getDoctrine()->getManager()->getRepository('ApplicationCoreBundle:Solution');
+        $result = $solutionRepository->findOneBy(['task' => $task, 'user' => $user]);
+
+        return (is_null($result)) ? false : true;
     }
 }
