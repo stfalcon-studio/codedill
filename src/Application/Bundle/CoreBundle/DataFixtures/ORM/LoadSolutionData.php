@@ -124,7 +124,6 @@ DESC
 
         $solution = (new Solution())->setTask($task2)
                                     ->setCode(<<<'DESC'
-
     /**
      * Check first and last letters for compatibility
      *
