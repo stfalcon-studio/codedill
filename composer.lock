@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a6c4d62b8a175884e83c46c8d723487b",
+    "hash": "d474724133ca11f74a0a7beb6b68c6d1",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1742,6 +1742,58 @@
                 "psr-3"
             ],
             "time": "2014-09-30 13:30:58"
+        },
+        {
+            "name": "norzechowicz/aceeditor-bundle",
+            "version": "0.1.1",
+            "target-dir": "Norzechowicz/AceEditorBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/norzechowicz/aceeditor-bundle.git",
+                "reference": "b52995e312e5a548a25a843ada524b7cd6734329"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/norzechowicz/aceeditor-bundle/zipball/b52995e312e5a548a25a843ada524b7cd6734329",
+                "reference": "b52995e312e5a548a25a843ada524b7cd6734329",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "~2.1",
+                "twig/twig": "~1.2"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Norzechowicz\\AceEditorBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Norbert Orzechowicz",
+                    "email": "norbert@orzechowicz.pl"
+                }
+            ],
+            "description": "Bundle that integrate excellent JavaScript ace editor into Symfony2 Form.",
+            "keywords": [
+                "ace",
+                "bundle",
+                "editor",
+                "form",
+                "javascript",
+                "symfony"
+            ],
+            "time": "2013-12-04 15:02:27"
         },
         {
             "name": "phpcollection/phpcollection",

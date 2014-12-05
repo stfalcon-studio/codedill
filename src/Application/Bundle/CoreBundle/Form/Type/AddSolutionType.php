@@ -15,12 +15,25 @@ class AddSolutionType extends AbstractType
      * Build form
      *
      * @param FormBuilderInterface $builder Builder
-     * @param array                $options Options
+     * @param array $options Options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code', 'textarea');
+            ->add('code', 'ace_editor', array(
+                'wrapper_attr' => array(), // aceeditor wrapper html attributes.
+                'width' => 1200,
+                'height' => 300,
+                'font_size' => 14,
+                'mode' => 'ace/mode/html', // every single default mode must have ace/mode/* prefix
+                'theme' => 'ace/theme/github', // every single default theme must have ace/theme/* prefix
+                'tab_size' => null,
+                'read_only' => null,
+                'use_soft_tabs' => null,
+                'use_wrap_mode' => null,
+                'show_print_margin' => null,
+                'highlight_active_line' => null
+            ));
     }
 
     /**
