@@ -74,16 +74,12 @@ class UserController extends Controller
      */
     public function userSolutionFeedbackActions($user, $solution)
     {
-        $em = $this->getDoctrine()->getManager();
-        $commentRepository = $em->getRepository('ApplicationCoreBundle:Comment');
-        $comments = $commentRepository->getThreadComments('s_' . $solution->getId());
-
-        return $this->render(
-            'ApplicationCoreBundle:User:solution_feedback.html.twig',
-            [
+        return $this->forward(
+            'ApplicationCoreBundle:Solution:show',
+            array(
                 'solution' => $solution,
-                'comments' => $comments,
-            ]
+                'request'  => $this->getRequest(),
+            )
         );
     }
 }

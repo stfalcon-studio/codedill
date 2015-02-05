@@ -16,15 +16,18 @@
     vertical-align: middle;
     border-radius: .25em;
     cursor: pointer;
+    opacity: 0.7;
 }
 
 #solution_rating_rating_value label:hover {
     box-shadow: 0 0 5px #637288;
+    opacity: 0.9;
 }
 
 #solution_rating_rating_value label.active {
     box-shadow: 0 0 5px #000000;
     color: #000000;
+    opacity: 1;
 }
 
 [for="solution_rating_rating_value_0"] {

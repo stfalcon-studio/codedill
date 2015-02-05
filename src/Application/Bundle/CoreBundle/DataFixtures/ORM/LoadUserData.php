@@ -44,17 +44,8 @@ class LoadUserData extends AbstractFixture
         $manager->persist($user3);
         $manager->flush();
 
-        $user4 = new User();
-        $user4->setUsername('user_4');
-        $user4->setEmail('some4@email.com');
-        $user4->setPlainPassword('user_4');
-        $user4->setGithubId('some_id');
-        $manager->persist($user4);
-        $manager->flush();
-
         $this->addReference('user_1', $user1);
         $this->addReference('user_2', $user2);
         $this->addReference('user_3', $user3);
-        $this->addReference('user_4', $user4);
     }
 }
