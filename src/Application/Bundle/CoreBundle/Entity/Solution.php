@@ -63,6 +63,14 @@ class Solution
     private $code;
 
     /**
+     * @var string $codeMode CodeMode
+     *
+     * @Assert\Choice(callback = "getValidCodeModes")
+     * @ORM\Column(name="code_mode", type="string")
+     */
+    private $codeMode;
+
+    /**
      * @return string
      */
     public function __toString()
@@ -150,5 +158,44 @@ class Solution
         $this->user = $user;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCodeMode()
+    {
+        return $this->codeMode;
+    }
+
+    /**
+     * @param string $codeMode
+     */
+    public function setCodeMode($codeMode)
+    {
+        $this->codeMode = $codeMode;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getCodeModes()
+    {
+        return array(
+            'ace/mode/html' => 'HTML',
+            'ace/mode/php' => 'PHP',
+            'ace/mode/css' => 'CSS',
+            'ace/mode/java' => 'Java',
+            'ace/mode/python' => 'Python',
+            'ace/mode/sql' => 'SQL',
+        );
+    }
+
+    /**
+     * @return array
+     */
+    public static function getValidCodeModes()
+    {
+        return array_keys(self::getCodeModes());
     }
 }

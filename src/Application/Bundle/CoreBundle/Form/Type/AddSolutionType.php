@@ -2,6 +2,7 @@
 
 namespace Application\Bundle\CoreBundle\Form\Type;
 
+use Application\Bundle\CoreBundle\Entity\Solution;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -31,12 +32,18 @@ class AddSolutionType extends AbstractType
             'use_wrap_mode' => null,
             'show_print_margin' => true,
             'highlight_active_line' => true,
-            'data' => "<?php\n"
         );
 
         $defaultParams = array_merge($this->params, $defaultParams);
 
         $builder
+            ->add(
+                'codeMode',
+                'choice',
+                array(
+                    'choices' => Solution::getCodeModes(),
+                )
+            )
             ->add('code', 'ace_editor', $defaultParams);
     }
 

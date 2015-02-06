@@ -39,12 +39,14 @@ class AceEditorReadOnlyExtension extends \Twig_Extension
 
     /**
      * @param  string $code
+     * @param  string $style
      * @return string
      */
-    public function renderEditor($code)
+    public function renderEditor($code, $style)
     {
         $this->params['read_only'] = true;
         $this->params['code'] = $code;
+        $this->params['style'] = $style;
 
         return $this->container->get('templating')->render(
             'ApplicationCoreBundle:AceEditor:ace_editor.html.twig',

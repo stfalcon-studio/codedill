@@ -31,7 +31,7 @@
     <h2>Solution #{{ solution.id }}</h2>
     <div class="editor-container">
         {{ include_ace_editor() }}
-        {{ solution.code | ace_editor_read_only | raw }}
+        {{ solution.code | ace_editor_read_only(solution.codeMode) | raw }}
     </div>
 
 

@@ -22,7 +22,7 @@
     <div class="form-container">
         {{ form_start(form) }}
         {{ form_errors(form) }}
-
+        {{ form_row(form.codeMode) }}
         <div class="form-group">
             {{ form_row(form.code, { 'attr': {'class': 'form-control', 'rows' : 10} }) }}
         </div>
