@@ -17,10 +17,7 @@ class AddSolutionType extends AbstractType
     private $params = array();
 
     /**
-     * Build form
-     *
-     * @param FormBuilderInterface $builder Builder
-     * @param array $options Options
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -33,10 +30,10 @@ class AddSolutionType extends AbstractType
             'theme' => 'ace/theme/github', // every single default theme must have ace/theme/* prefix
             'tab_size' => null,
             'read_only' => null,
-            'use_soft_tabs' => null,
+            'use_soft_tabs' => true,
             'use_wrap_mode' => null,
             'show_print_margin' => null,
-            'highlight_active_line' => null
+            'highlight_active_line' => true
         );
 
         $defaultParams = array_merge($defaultParams, $this->params);
