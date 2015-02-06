@@ -71,7 +71,6 @@ class TaskController extends Controller
 
         $solution = new Solution();
         $solution->setTask($task);
-        $solution->setUser($user);
 
         $form = $this->createForm($this->get('app.add_solution_type.form'), $solution);
         $form->handleRequest($request);

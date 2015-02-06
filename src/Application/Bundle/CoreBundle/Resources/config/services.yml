@@ -16,5 +16,6 @@ services:
 
     app.add_solution_type.form:
         class: Application\Bundle\CoreBundle\Form\Type\AddSolutionType
+        arguments: [@security.context]
         calls:
             - [setParams, [%ace.editor%]]
