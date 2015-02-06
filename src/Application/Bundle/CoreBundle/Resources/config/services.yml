@@ -18,3 +18,8 @@ services:
         class: Application\Bundle\CoreBundle\Form\Type\AddSolutionType
         calls:
             - [setParams, [%ace.editor%]]
+
+    app.solution:
+        class: Application\Bundle\CoreBundle\Service\SolutionService
+        arguments:
+            - @app.repository.solution

@@ -14,13 +14,36 @@ use Application\Bundle\CoreBundle\Entity\Solution;
 class SolutionRepository extends EntityRepository
 {
     /**
-     * @param User $user
-     * @param Task $task
+     * Get solution by user and task
+     *
+     * @param Task $task Task
+     * @param User $user User
      *
      * @return Solution
      */
-    public function getSolutionByUserAndTask($task, $user)
+    public function getSolutionByUserAndTask(Task $task, User $user)
     {
-        return $this->findOneBy(['task' => $task, 'user' => $user]);
+        return $this->findOneBy([
+            'task' => $task,
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * Get solutions count for task
+     *
+     * @param Task $task Task
+     *
+     * @return array
+     */
+    public function getSolutionsCountForTask(Task $task)
+    {
+        $qb = $this->createQueryBuilder('s');
+
+        return $qb->select($qb->expr()->count('s.id'))
+                  ->where($qb->expr()->eq('s.task', ':task'))
+                  ->setParameter('task', $task)
+                  ->getQuery()
+                  ->getSingleScalarResult();
     }
 }
