@@ -1,11 +1,19 @@
 {% extends 'ApplicationCoreBundle:Task:index.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
 
+    {% javascripts
+    '@ApplicationCoreBundle/Resources/public/js/solution.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
 {% block content %}
     ← <a href="{{ path('tasks_list') }}">all tasks</a>
 
     <h1>{{ task.fullTitle }}</h1>
     <div id="task-description" class="collapse out">{{ task.description|raw }}</div>
-    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#task-description" aria-expanded="true" aria-controls="task-description">
+    <button id="descr-btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#task-description" aria-expanded="true" aria-controls="task-description">
       Show description
     </button>
 
