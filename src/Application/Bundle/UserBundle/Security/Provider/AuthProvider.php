@@ -11,11 +11,23 @@ use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseProvider;
  */
 class AuthProvider extends BaseProvider
 {
+    /**
+     * @var array $adminGitHubIds Admin GitHub IDs
+     */
+    private $adminGitHubIds = [
+        424723,  // Valera
+        815865,  // Artem
+        1199467, // Zhenya
+        1430407, // Misha
+        1486415, // Timur
+        2345473, // Vadim
+        5329546, // Sasha
+    ];
 
     /**
      * @var UserManagerInterface
      */
-    protected $userManager;
+    private $userManager;
 
     /**
      * Constructor
@@ -32,11 +44,9 @@ class AuthProvider extends BaseProvider
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $user = $this->userManager->findUserBy(
-            [
-                'githubId' => $response->getUsername()
-            ]
-        );
+        $user = $this->userManager->findUserBy([
+            'githubId' => $response->getUsername()
+        ]);
 
         if ($user instanceof User) {
             return $user;
@@ -64,6 +74,12 @@ class AuthProvider extends BaseProvider
         $user->setEnabled(true);
         $user->setPlainPassword(uniqid());
         $user->setGithubId($response->getUsername());
+
+        // Move to separate listener
+        if (in_array($response->getUsername(), $this->adminGitHubIds)) {
+            $user->addRole('ROLE_ADMIN');
+        }
+
         $this->userManager->updateUser($user);
 
         return $user;
