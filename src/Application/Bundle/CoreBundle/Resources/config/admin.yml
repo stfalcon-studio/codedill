@@ -1,0 +1,9 @@
+services:
+    admin.task:
+        class: Application\Bundle\CoreBundle\Admin\TaskAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Default", label: "Tasks" }
+        arguments:
+            - ~
+            - Application\Bundle\CoreBundle\Entity\Task
+            - ~

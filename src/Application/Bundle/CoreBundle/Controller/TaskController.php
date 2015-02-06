@@ -69,9 +69,7 @@ class TaskController extends Controller
             throw $this->createNotFoundException('Error! Solution must be unique.');
         }
 
-        $solution = (new Solution())
-            ->setTask($task)
-            ->setUser($user);
+        $solution = (new Solution())->setTask($task);
 
         $form = $this->createForm($this->get('app.add_solution_type.form'), $solution);
         $form->handleRequest($request);

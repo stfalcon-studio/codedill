@@ -1,0 +1,7 @@
+fos_user:
+    db_driver: orm
+    firewall_name: secured_area
+    user_class: Application\Bundle\UserBundle\Entity\User
+    registration:
+        confirmation:
+            enabled: false # change to true for required email confirmation
