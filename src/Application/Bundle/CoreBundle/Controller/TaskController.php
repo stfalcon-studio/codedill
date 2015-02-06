@@ -66,18 +66,20 @@ class TaskController extends Controller
         $user = $this->getUser();
 
         if ($this->checkIfUserSolutionForTaskExists($user, $task)) {
-            throw $this->createNotFoundException('Error!Solution must be unique.');
+            throw $this->createNotFoundException('Error! Solution must be unique.');
         }
 
-        $solution = new Solution();
-        $solution->setTask($task);
-        $solution->setUser($user);
+        $solution = (new Solution())->setTask($task);
 
         $form = $this->createForm($this->get('app.add_solution_type.form'), $solution);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            /** @var \Application\Bundle\CoreBundle\Entity\Solution $solution */
             $solution = $form->getData();
+
+            $solutionService = $this->get('app.solution');
+            $solution->setBonus($solutionService->getBonusForSolution($task));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($solution);
@@ -243,6 +245,6 @@ class TaskController extends Controller
         $solutionRepository = $this->getDoctrine()->getRepository('ApplicationCoreBundle:Solution');
         $result = $solutionRepository->getSolutionByUserAndTask($task, $user);
 
-        return (is_null($result)) ? false : true;
+        return (null === $result) ? false : true;
     }
 }

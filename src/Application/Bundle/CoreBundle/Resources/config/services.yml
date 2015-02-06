@@ -1,8 +1,8 @@
 parameters:
     ace.editor:
-       theme: 'ace/theme/eclipse'
-       mode: 'ace/mode/html'
-       font_size: 14
+       theme: 'ace/theme/monokai'
+       mode: 'ace/mode/php'
+       font_size: 16
 
 services:
     app.twig.ace_editor_readonly_extension:
@@ -16,5 +16,11 @@ services:
 
     app.add_solution_type.form:
         class: Application\Bundle\CoreBundle\Form\Type\AddSolutionType
+        arguments: [@security.context]
         calls:
             - [setParams, [%ace.editor%]]
+
+    app.solution:
+        class: Application\Bundle\CoreBundle\Service\SolutionService
+        arguments:
+            - @app.repository.solution

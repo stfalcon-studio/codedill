@@ -34,6 +34,10 @@ class LoadSolutionData extends AbstractFixture implements DependentFixtureInterf
         /**
          * @var \Application\Bundle\CoreBundle\Entity\Task $task1
          * @var \Application\Bundle\CoreBundle\Entity\Task $task2
+         *
+         * @var \Application\Bundle\UserBundle\Entity\User $user1
+         * @var \Application\Bundle\UserBundle\Entity\User $user2
+         * @var \Application\Bundle\UserBundle\Entity\User $user3
          */
         $task1 = $this->getReference('task-1');
         $task2 = $this->getReference('task-2');
@@ -41,8 +45,11 @@ class LoadSolutionData extends AbstractFixture implements DependentFixtureInterf
         $user2 = $this->getReference('user_2');
         $user3 = $this->getReference('user_3');
 
-        $solution1 = (new Solution())->setTask($task1)
-                                    ->setCode(<<<'DESC'
+        $solution1 = (new Solution())
+            ->setTask($task1)
+            ->setUser($user1)
+            ->setBonus(15)
+            ->setCode(<<<'DESC'
     /**
      * Preliminary checks that can skip some fake arrays of words
      *
@@ -57,13 +64,15 @@ class LoadSolutionData extends AbstractFixture implements DependentFixtureInterf
                && CrosswordHelper::firstAndLastLettersAreCompatible($words);
     }
 DESC
-                            );
+        );
         $this->addReference('solution-1', $solution1);
-        $solution1->setUser($user1);
         $manager->persist($solution1);
 
-        $solution2 = (new Solution())->setTask($task1)
-                                    ->setCode(<<<'DESC'
+        $solution2 = (new Solution())
+            ->setTask($task1)
+            ->setUser($user2)
+            ->setBonus(10)
+            ->setCode(<<<'DESC'
     /**
      * Check allowed length for words
      *
@@ -86,14 +95,15 @@ DESC
         return $result;
     }
 DESC
-                            );
+        );
         $this->addReference('solution-2', $solution2);
-        $solution2->setUser($user2);
-
         $manager->persist($solution2);
 
-        $solution3 = (new Solution())->setTask($task2)
-                                    ->setCode(<<<'DESC'
+        $solution3 = (new Solution())
+            ->setTask($task2)
+            ->setUser($user1)
+            ->setBonus(15)
+            ->setCode(<<<'DESC'
     /**
      * Check if crossword could be made from array of words
      *
@@ -124,13 +134,15 @@ DESC
         return $result;
     }
 DESC
-                                    );
+        );
         $this->addReference('solution-3', $solution3);
-        $solution3->setUser($user3);
         $manager->persist($solution3);
 
-        $solution4 = (new Solution())->setTask($task2)
-                                    ->setCode(<<<'DESC'
+        $solution4 = (new Solution())
+            ->setTask($task2)
+            ->setUser($user2)
+            ->setBonus(10)
+            ->setCode(<<<'DESC'
     /**
      * Check first and last letters for compatibility
      *
@@ -158,11 +170,45 @@ DESC
         return $result;
     }
 DESC
-                                    );
+        );
         $this->addReference('solution-4', $solution4);
-        $solution4->setUser($user1);
-
         $manager->persist($solution4);
+
+        $solution5 = (new Solution())
+            ->setTask($task2)
+            ->setUser($user3)
+            ->setBonus(5)
+            ->setCode(<<<'DESC'
+    /**
+     * Check first and last letters for compatibility
+     *
+     * @param array $words
+     *
+     * @return bool
+     */
+    public static function firstAndLastLettersAreCompatible(array $words)
+    {
+        $result  = true;
+        $letters = '';
+        foreach ($words as $word) {
+            $letters .= substr($word, 0, 1);  // First letter
+            $letters .= substr($word, -1, 1); // Second letter
+        }
+        // Get letters stats
+        $lettersStats = count_chars($letters, 1);
+        foreach ($lettersStats as $letterStats) {
+            // Only even count of same letter is allowed
+            if ($letterStats % 2 !== 0) {
+                $result = false;
+                break;
+            }
+        }
+        return $result;
+    }
+DESC
+            );
+        $this->addReference('solution-5', $solution5);
+        $manager->persist($solution5);
 
         $manager->flush();
     }

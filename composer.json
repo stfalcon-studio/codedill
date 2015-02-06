@@ -7,8 +7,8 @@
         "psr-4": { "": "src/" }
     },
     "require": {
-        "php": ">=5.3.3",
-        "symfony/symfony": "2.5.*",
+        "php": ">=5.4.0",
+        "symfony/symfony": "2.6.*",
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "~1.2",
         "twig/extensions": "~1.0",
@@ -27,7 +27,10 @@
         "stof/doctrine-extensions-bundle": "1.2.x-dev",
         "sp/bower-bundle": "0.11",
         "friendsofsymfony/comment-bundle": "2.0.6",
-        "norzechowicz/aceeditor-bundle": "0.1.*"
+        "norzechowicz/aceeditor-bundle": "0.1.*",
+
+        "sonata-project/doctrine-orm-admin-bundle": "2.2.6",
+        "sonata-project/core-bundle": "~2.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
@@ -76,9 +79,6 @@
         "symfony-assets-install": "symlink",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
-        },
-        "branch-alias": {
-            "dev-master": "2.5-dev"
         }
     }
 }
