@@ -13,5 +13,16 @@
         fos_comment_script.type = 'text/javascript';
 
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(fos_comment_script);
+
+        $(document).on('fos_comment_add_comment', function (event, data) {
+            var $comment = $(data);
+            $('#' + $comment.attr('id')).remove();
+            var $threadContainer = $('#fos_comment_thread');
+            $comment.insertAfter($threadContainer.find('.comments-counter'));
+            var $counterElement = $threadContainer.find('.comments-counter span');
+            var counter = parseInt($counterElement.text());
+            counter = counter + 1;
+            $counterElement.text(counter);
+        });
     })();
 </script>

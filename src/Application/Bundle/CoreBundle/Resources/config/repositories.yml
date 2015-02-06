@@ -1,0 +1,7 @@
+services:
+    app.repository.solution:
+        class: Application\Bundle\CoreBundle\Repository\SolutionRepository
+        factory_service: doctrine
+        factory_method: getRepository
+        arguments:
+            - ApplicationCoreBundle:Solution

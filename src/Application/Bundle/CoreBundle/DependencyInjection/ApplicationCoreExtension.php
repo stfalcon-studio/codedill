@@ -24,6 +24,7 @@ class ApplicationCoreExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('admin.yml');
+        $loader->load('repositories.yml');
         $loader->load('services.yml');
     }
 }

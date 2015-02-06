@@ -63,6 +63,13 @@ class Solution
     private $code;
 
     /**
+     * @var int $bonus Bonus
+     *
+     * @ORM\Column(name="bonus", type="smallint", nullable=false)
+     */
+    private $bonus = 0;
+
+    /**
      * @var string $codeMode CodeMode
      *
      * @Assert\Choice(callback = "getValidCodeModes")
@@ -75,7 +82,7 @@ class Solution
      */
     public function __toString()
     {
-        return (string)$this->getId() ?: 'New Solution';
+        return (string) $this->getId() ?: 'New Solution';
     }
 
     /**
@@ -156,6 +163,30 @@ class Solution
     public function setUser($user)
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get bonus
+     *
+     * @return int Bonus
+     */
+    public function getBonus()
+    {
+        return $this->bonus;
+    }
+
+    /**
+     * Set bonus
+     *
+     * @param int $bonus Bonus
+     *
+     * @return $this
+     */
+    public function setBonus($bonus)
+    {
+        $this->bonus = $bonus;
 
         return $this;
     }
