@@ -2,10 +2,10 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% javascripts
-        '@FOSCommentBundle/Resources/assets/js/comments.js'
-        '@ApplicationCoreBundle/Resources/public/js/rating.js'
-    %}
+    {% javascripts '@ApplicationCoreBundle/Resources/public/js/rating.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% javascripts '@FOSCommentBundle/Resources/assets/js/comments.js' %}
         {% include 'ApplicationCoreBundle:Solution:_comment.html.twig' with {'solution': solution, 'asset_url' : asset_url } %}
     {% endjavascripts %}
 {% endblock %}
