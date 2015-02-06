@@ -5,12 +5,31 @@ namespace Application\Bundle\CoreBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Application\Bundle\UserBundle\Entity\User;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 /**
  * AddSolutionType
  */
 class AddSolutionType extends AbstractType
 {
+    /**
+     * @var \Application\Bundle\UserBundle\Entity\User|null
+     */
+    private $user;
+
+    /**
+     * @param SecurityContextInterface $securityContext
+     */
+    public function __construct(SecurityContextInterface $securityContext)
+    {
+        $user = $securityContext->getToken()->getUser();
+
+        $this->user = $user instanceof User ? $user : null;
+    }
+
     /**
      * @var array
      */
@@ -40,6 +59,12 @@ class AddSolutionType extends AbstractType
 
         $builder
             ->add('code', 'ace_editor', $defaultParams);
+
+        $user = $this->user;
+        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($user) {
+            $item = $event->getData();
+            $item->setUser($user);
+        });
     }
 
     /**
