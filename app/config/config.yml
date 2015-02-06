@@ -4,6 +4,10 @@ imports:
     - { resource: doctrine.yml }
     - { resource: aceeditor.yml }
     - { resource: oauth.yml }
+    - { resource: fos_user.yml }
+    - { resource: sonata/sonata-admin.yml }
+    - { resource: sonata/sonata-admin-orm.yml }
+    - { resource: sonata/sonata-block.yml }
 
 framework:
     #esi:             ~
