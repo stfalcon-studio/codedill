@@ -27,7 +27,7 @@ class AuthProvider extends BaseProvider
     /**
      * @var UserManagerInterface
      */
-    private $userManager;
+    protected $userManager;
 
     /**
      * Constructor
