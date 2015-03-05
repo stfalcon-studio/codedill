@@ -200,11 +200,17 @@ class Solution
     }
 
     /**
-     * @param string $codeMode
+     * Set code mode
+     *
+     * @param string $codeMode Code mode
+     *
+     * @return $this
      */
     public function setCodeMode($codeMode)
     {
         $this->codeMode = $codeMode;
+
+        return $this;
     }
 
     /**

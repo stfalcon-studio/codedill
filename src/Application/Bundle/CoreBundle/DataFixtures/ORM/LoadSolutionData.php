@@ -2,10 +2,10 @@
 
 namespace Application\Bundle\CoreBundle\DataFixtures\ORM;
 
+use Application\Bundle\CoreBundle\Entity\Solution;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Application\Bundle\CoreBundle\Entity\Solution;
 
 /**
  * Load Solution fixtures
@@ -49,6 +49,7 @@ class LoadSolutionData extends AbstractFixture implements DependentFixtureInterf
             ->setTask($task1)
             ->setUser($user1)
             ->setBonus(15)
+            ->setCodeMode('ace/mode/php')
             ->setCode(<<<'DESC'
     /**
      * Preliminary checks that can skip some fake arrays of words
@@ -72,6 +73,7 @@ DESC
             ->setTask($task1)
             ->setUser($user2)
             ->setBonus(10)
+            ->setCodeMode('ace/mode/php')
             ->setCode(<<<'DESC'
     /**
      * Check allowed length for words
@@ -103,6 +105,7 @@ DESC
             ->setTask($task2)
             ->setUser($user1)
             ->setBonus(15)
+            ->setCodeMode('ace/mode/php')
             ->setCode(<<<'DESC'
     /**
      * Check if crossword could be made from array of words
@@ -142,6 +145,7 @@ DESC
             ->setTask($task2)
             ->setUser($user2)
             ->setBonus(10)
+            ->setCodeMode('ace/mode/php')
             ->setCode(<<<'DESC'
     /**
      * Check first and last letters for compatibility
@@ -178,6 +182,7 @@ DESC
             ->setTask($task2)
             ->setUser($user3)
             ->setBonus(5)
+            ->setCodeMode('ace/mode/php')
             ->setCode(<<<'DESC'
     /**
      * Check first and last letters for compatibility
