@@ -2,11 +2,10 @@
 
 namespace Application\Bundle\CoreBundle\Repository;
 
-use Doctrine\ORM\Query;
-use Doctrine\ORM\EntityRepository;
-use Application\Bundle\UserBundle\Entity\User;
-use Application\Bundle\CoreBundle\Entity\Task;
 use Application\Bundle\CoreBundle\Entity\Solution;
+use Application\Bundle\CoreBundle\Entity\Task;
+use Application\Bundle\UserBundle\Entity\User;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * SolutionRepository

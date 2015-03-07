@@ -4,7 +4,6 @@ namespace Application\Bundle\CoreBundle\Repository;
 
 use Application\Bundle\CoreBundle\Entity\Task;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 
 /**
  * SolutionRatingsRepository
