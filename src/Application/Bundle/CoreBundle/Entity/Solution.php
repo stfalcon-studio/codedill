@@ -26,6 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      }
  * )
  * @ORM\Entity(repositoryClass="Application\Bundle\CoreBundle\Repository\SolutionRepository")
+ *
  * @UniqueEntity(
  *     fields={"user", "task"},
  *     errorPath="code",
@@ -39,8 +40,8 @@ class Solution
     /**
      * @var int $id ID
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -64,7 +65,7 @@ class Solution
     /**
      * @var string $code Code
      *
-     * @ORM\Column(name="code", type="text", nullable=false)
+     * @ORM\Column(type="text", nullable=false)
      *
      * @Assert\NotBlank()
      */
@@ -73,15 +74,16 @@ class Solution
     /**
      * @var int $bonus Bonus
      *
-     * @ORM\Column(name="bonus", type="smallint", nullable=false)
+     * @ORM\Column(type="smallint", nullable=false)
      */
     private $bonus = 0;
 
     /**
      * @var string $codeMode CodeMode
      *
-     * @Assert\Choice(callback = "getValidCodeModes")
-     * @ORM\Column(name="code_mode", type="string")
+     * @ORM\Column(type="string")
+     *
+     * @Assert\Choice(callback="getValidCodeModes")
      */
     private $codeMode;
 

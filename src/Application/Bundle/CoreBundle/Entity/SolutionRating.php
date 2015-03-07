@@ -25,6 +25,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *      }
  * )
  * @ORM\Entity(repositoryClass="Application\Bundle\CoreBundle\Repository\SolutionRatingsRepository")
+ *
  * @UniqueEntity(
  *     fields={"user", "solution"},
  *     errorPath="solution",
@@ -34,16 +35,16 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class SolutionRating
 {
     /**
-     * @var int $id
+     * @var int $id ID
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var User $user
+     * @var User $user User
      *
      * @ORM\ManyToOne(targetEntity="Application\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
@@ -51,7 +52,7 @@ class SolutionRating
     private $user;
 
     /**
-     * @var Solution $user
+     * @var Solution $solution Solution
      *
      * @ORM\ManyToOne(targetEntity="Application\Bundle\CoreBundle\Entity\Solution")
      * @ORM\JoinColumn(name="solution_id", referencedColumnName="id")
@@ -59,17 +60,18 @@ class SolutionRating
     private $solution;
 
     /**
-     * @var int
+     * @var int $ratingValue Rating value
      *
-     * @ORM\Column(name="rating_value", type="smallint", nullable=false)
+     * @ORM\Column(type="smallint", nullable=false)
      */
     private $ratingValue;
 
     /**
-     * @var \DateTime
+     * @var \DateTime $createdAt Created at
+     *
+     * @ORM\Column(type="datetime")
      *
      * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
@@ -82,7 +84,9 @@ class SolutionRating
     }
 
     /**
-     * @return int
+     * Get ID
+     *
+     * @return int ID
      */
     public function getId()
     {
