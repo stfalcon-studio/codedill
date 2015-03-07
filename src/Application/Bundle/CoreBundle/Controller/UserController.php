@@ -2,7 +2,6 @@
 
 namespace Application\Bundle\CoreBundle\Controller;
 
-use Application\Bundle\CoreBundle\Entity\Solution;
 use Application\Bundle\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -27,7 +26,7 @@ class UserController extends Controller
      * @Route("/{username}/solutions", name="user_solutions_list")
      * @ParamConverter("user", class="ApplicationUserBundle:User")
      */
-    public function userSolutionsActions(User $user)
+    public function userSolutionsAction(User $user)
     {
         // Check if user from URL is same as current user
         if ($user->getId() != $this->getUser()->getId()) {

@@ -17,4 +17,4 @@ swiftmailer:
 
 doctrine:
     dbal:
-        dbname: "codedill_testing"
+        dbname: "%database_test_name%"

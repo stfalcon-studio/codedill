@@ -83,10 +83,10 @@ fos_comment:
     db_driver: orm
     class:
         model:
-            comment:  Application\Bundle\CoreBundle\Entity\Comment
+            comment: Application\Bundle\CoreBundle\Entity\Comment
             thread:  Application\Bundle\CoreBundle\Entity\Thread
 
 sensio_framework_extra:
    request:
-       converters: true
+       converters:   true
        auto_convert: false
