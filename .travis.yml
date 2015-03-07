@@ -14,6 +14,7 @@ before_install:
   - sudo pip install codecov
 
 before_script:
+  - npm install -g bower
   - composer install --dev
 
 script:
