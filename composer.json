@@ -1,10 +1,59 @@
 {
     "name": "stfalcon-studio/codedill",
-    "license": "MIT",
+    "description": "Web service for creating study tasks for developers and evaluating solutions anonymously.",
+    "keywords": ["web service", "task", "solution", "anonymously", "code", "dill"],
     "type": "project",
-    "description": "Тут росте УКРОП",
-    "autoload": {
-        "psr-4": { "": "src/" }
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Valeriy Rabievsky",
+            "email": "facktoreal@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Artem Genvald",
+            "email": "genvaldartem@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Andrey Shkodyak",
+            "email": "fluxuator@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Mykhailo Vilshansky",
+            "email": "myvilsh@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Alexandr Lensky",
+            "email": "lensky84@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Timur Bolotyuh",
+            "email": "timur.bolotyuh@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Vadim Gumennyj",
+            "email": "vadim.gumennyj@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Evgeniy Gurinovich",
+            "email": "filosof.km@gmail.com",
+            "role": "Admin"
+        },
+        {
+            "name": "Community",
+            "homepage": "https://github.com/stfalcon-studio/codedill/graphs/contributors",
+            "role": "Developers"
+        }
+    ],
+    "support": {
+        "email": "facktoreal@gmail.com",
+        "issues": "https://github.com/stfalcon-studio/lost-and-found/issues"
     },
     "require": {
         "php": ">=5.4.0",
@@ -18,7 +67,6 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-
         "hwi/oauth-bundle": "0.4.*@dev",
         "friendsofsymfony/user-bundle": "2.0.*@dev",
         "gedmo/doctrine-extensions": "2.3.*@dev",
@@ -28,7 +76,6 @@
         "sp/bower-bundle": "0.11",
         "friendsofsymfony/comment-bundle": "2.0.6",
         "norzechowicz/aceeditor-bundle": "0.1.*",
-
         "sonata-project/doctrine-orm-admin-bundle": "2.2.6",
         "sonata-project/core-bundle": "~2.2"
     },
@@ -46,6 +93,11 @@
         "behat/mink-browserkit-driver": "~1.2",
         "behat/mink-selenium2-driver": "~1.2",
         "behat/common-contexts": "1.2.*@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
     },
     "scripts": {
         "post-root-package-install": [
