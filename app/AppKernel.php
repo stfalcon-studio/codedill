@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the Codedill project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -24,16 +32,17 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Application\Bundle\CoreBundle\ApplicationCoreBundle(),
 
             // Auth bundles
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Sp\BowerBundle\SpBowerBundle(),
             new Application\Bundle\UserBundle\ApplicationUserBundle(),
+
             // Doctrine bundles
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+
             // Comment bundle
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\CommentBundle\FOSCommentBundle(),
@@ -46,6 +55,9 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+
+            // Application bundles
+            new Application\Bundle\CoreBundle\ApplicationCoreBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

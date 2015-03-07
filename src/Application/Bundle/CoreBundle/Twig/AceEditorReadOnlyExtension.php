@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the Codedill project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Application\Bundle\CoreBundle\Twig;
 
@@ -32,21 +40,22 @@ class AceEditorReadOnlyExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('ace_editor_read_only', array($this, 'renderEditor')),
-        );
+        return [
+            new \Twig_SimpleFilter('ace_editor_read_only', [$this, 'renderEditor']),
+        ];
     }
 
     /**
      * @param  string $code
      * @param  string $style
+     *
      * @return string
      */
     public function renderEditor($code, $style)
     {
         $this->params['read_only'] = true;
-        $this->params['code'] = $code;
-        $this->params['style'] = $style;
+        $this->params['code']      = $code;
+        $this->params['style']     = $style;
 
         return $this->container->get('templating')->render(
             'ApplicationCoreBundle:AceEditor:ace_editor.html.twig',

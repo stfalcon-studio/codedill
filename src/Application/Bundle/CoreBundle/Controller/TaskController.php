@@ -1,12 +1,20 @@
 <?php
+/*
+ * This file is part of the Codedill project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Application\Bundle\CoreBundle\Controller;
 
 use Application\Bundle\CoreBundle\Entity\Solution;
 use Application\Bundle\CoreBundle\Entity\SolutionRating;
 use Application\Bundle\CoreBundle\Entity\Task;
-use Application\Bundle\CoreBundle\Form\Type\SolutionRatingType;
 use Application\Bundle\UserBundle\Entity\User;
+use Application\Bundle\CoreBundle\Form\Type\SolutionRatingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
