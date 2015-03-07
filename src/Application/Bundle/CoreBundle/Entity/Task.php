@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the Codedill project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Application\Bundle\CoreBundle\Entity;
 
@@ -20,14 +28,14 @@ class Task
     /**
      * @var int $id ID
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var User $user
+     * @var User $user User
      *
      * @ORM\ManyToOne(targetEntity="Application\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
@@ -44,14 +52,14 @@ class Task
     /**
      * @var string $title Title
      *
-     * @ORM\Column(name="title", type="string", nullable=false)
+     * @ORM\Column(type="string", nullable=false)
      */
     private $title;
 
     /**
      * @var string $description Description
      *
-     * @ORM\Column(name="description", type="text", nullable=false)
+     * @ORM\Column(type="text", nullable=false)
      */
     private $description;
 
@@ -68,7 +76,7 @@ class Task
      */
     public function __toString()
     {
-        return $this->getTitle();
+        return $this->getTitle() ?: 'New Task';
     }
 
     /**
@@ -163,15 +171,11 @@ class Task
     /**
      * Get full title
      *
-     * @return string Title
+     * @return string Full title
      */
     public function getFullTitle()
     {
-        return sprintf(
-            '#%s: %s',
-            $this->id,
-            $this->title
-        );
+        return sprintf('#%s: %s', $this->id, $this->title);
     }
 
     /**

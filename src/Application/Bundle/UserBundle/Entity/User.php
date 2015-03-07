@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the Codedill project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Application\Bundle\UserBundle\Entity;
 
@@ -23,13 +31,16 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @var string
-     * @ORM\Column(name="github_id", type="string", length=255)
+     * @var string $githubId Github user ID
+     *
+     * @ORM\Column(type="string", length=255)
      */
     protected $githubId;
 
     /**
-     * @return int
+     * Get ID
+     *
+     * @return int ID
      */
     public function getId()
     {
@@ -37,7 +48,9 @@ class User extends BaseUser
     }
 
     /**
-     * @return string
+     * Get Github user ID
+     *
+     * @return string Github user ID
      */
     public function getGithubId()
     {
@@ -45,7 +58,9 @@ class User extends BaseUser
     }
 
     /**
-     * @param string $githubId
+     * Set Github user ID
+     *
+     * @param string $githubId Github user ID
      */
     public function setGithubId($githubId)
     {
