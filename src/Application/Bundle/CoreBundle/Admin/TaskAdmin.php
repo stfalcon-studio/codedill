@@ -24,9 +24,7 @@ class TaskAdmin extends Admin
     protected $baseRouteName = 'admin_task';
 
     /**
-     * @param \Sonata\AdminBundle\Datagrid\ListMapper $listMapper
-     *
-     * @return \Sonata\AdminBundle\Datagrid\ListMapper
+     * {@inheritdoc}
      */
     protected function configureListFields(ListMapper $listMapper)
     {
@@ -38,26 +36,25 @@ class TaskAdmin extends Admin
     }
 
     /**
-     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
-     *
-     * @return \Sonata\AdminBundle\Form\FormMapper
+     * {@inheritdoc}
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->add('title')
             ->add('description', 'ace_editor', [
-                'wrapper_attr' => [], // aceeditor wrapper html attributes.
-                'width' => 800,
-                'height' => 300,
-                'font_size' => 14,
-                'mode' => 'ace/mode/html', // every single default mode must have ace/mode/* prefix
-                'theme' => 'ace/theme/github', // every single default theme must have ace/theme/* prefix
-                'tab_size' => null,
-                'read_only' => null,
-                'use_soft_tabs' => true,
-                'use_wrap_mode' => null,
-                'show_print_margin' => null,
+                'wrapper_attr'          => [], // aceeditor wrapper html attributes.
+                'width'                 => 800,
+                'height'                => 300,
+                'font_size'             => 14,
+                'mode'                  => 'ace/mode/html', // every single default mode must have ace/mode/* prefix
+                'theme'                 => 'ace/theme/github',
+                // every single default theme must have ace/theme/* prefix
+                'tab_size'              => null,
+                'read_only'             => null,
+                'use_soft_tabs'         => true,
+                'use_wrap_mode'         => null,
+                'show_print_margin'     => null,
                 'highlight_active_line' => true
             ]);
 

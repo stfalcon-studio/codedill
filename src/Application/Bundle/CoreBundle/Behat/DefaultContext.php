@@ -8,10 +8,9 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpKernel\KernelInterface;
-
-use Doctrine\Common\DataFixtures\Loader,
-    Doctrine\Common\DataFixtures\Executor\ORMExecutor,
-    Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\Common\DataFixtures\Loader;
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
 class DefaultContext extends RawMinkContext implements Context, KernelAwareContext
 {

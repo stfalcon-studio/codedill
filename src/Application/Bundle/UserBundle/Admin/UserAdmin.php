@@ -24,9 +24,7 @@ class UserAdmin extends Admin
     protected $baseRouteName = 'admin_user';
 
     /**
-     * @param \Sonata\AdminBundle\Datagrid\ListMapper $listMapper
-     *
-     * @return \Sonata\AdminBundle\Datagrid\ListMapper
+     * {@inheritdoc}
      */
     protected function configureListFields(ListMapper $listMapper)
     {
@@ -39,9 +37,7 @@ class UserAdmin extends Admin
     }
 
     /**
-     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
-     *
-     * @return \Sonata\AdminBundle\Form\FormMapper
+     * {@inheritdoc}
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
