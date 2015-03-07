@@ -1,5 +1,8 @@
-Installation DEV environment
----------------
+# Codedill
+
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/stfalcon-studio/codedill?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
+## Installation DEV environment
 
 ### a) Check your System Configuration
 
@@ -65,4 +68,3 @@ Open https://github.com/settings/applications/new
 Press the button "Register application"
 
 Use the newly generated `Client ID` and `Client Secret` parameters    
- 
