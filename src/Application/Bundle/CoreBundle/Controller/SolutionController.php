@@ -4,7 +4,7 @@ namespace Application\Bundle\CoreBundle\Controller;
 
 use Application\Bundle\CoreBundle\Entity\Solution;
 use Application\Bundle\CoreBundle\Entity\SolutionRating;
-use Application\Bundle\CoreBundle\Form\SolutionRatingType;
+use Application\Bundle\CoreBundle\Form\Type\SolutionRatingType;
 use Application\Bundle\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -118,7 +118,7 @@ class SolutionController extends Controller
      * @Route("/{username}/solutions", name="user_solutions_list")
      * @ParamConverter("user", class="ApplicationUserBundle:User")
      */
-    public function userSolutionsActions(User $user, Request $request)
+    public function userSolutionsAction(User $user, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $solutionRepository = $em->getRepository('ApplicationCoreBundle:Solution');

@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Bundle\CoreBundle\Form;
+namespace Application\Bundle\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -33,7 +33,7 @@ class SolutionRatingType extends AbstractType
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {

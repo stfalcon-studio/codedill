@@ -5,17 +5,16 @@ namespace Application\Bundle\CoreBundle\Controller;
 use Application\Bundle\CoreBundle\Entity\Solution;
 use Application\Bundle\CoreBundle\Entity\SolutionRating;
 use Application\Bundle\CoreBundle\Entity\Task;
-use Application\Bundle\CoreBundle\Form\SolutionRatingType;
-use Application\Bundle\CoreBundle\Form\Type\AddSolutionType;
+use Application\Bundle\CoreBundle\Form\Type\SolutionRatingType;
+use Application\Bundle\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Application\Bundle\UserBundle\Entity\User;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * TaskController
@@ -164,6 +163,10 @@ class TaskController extends Controller
      * @param Task    $task    The task entity
      * @param Request $request The request object
      *
+     * @return Response
+     *
+     * @throws AccessDeniedException
+     *
      * @Route("/{id}/solutions", name="task_solutions_list")
      *
      * @ParamConverter("task", class="ApplicationCoreBundle:Task")
@@ -171,9 +174,6 @@ class TaskController extends Controller
      * @Method({"GET"})
      *
      * @Security("has_role('ROLE_USER')")
-     *
-     * @return Response
-     *
      */
     public function listSolutionsAction(Task $task, Request $request)
     {
@@ -188,7 +188,7 @@ class TaskController extends Controller
         );
 
         if (empty($userSolutionsForTask)) {
-            throw new AccessDeniedHttpException('You must first post your solution');
+            throw new AccessDeniedException('You must first post your solution');
         }
 
         $taskSolutions = $solutionsRepository->findBy(['task' => $task], ['createdAt' => 'DESC']);
@@ -240,7 +240,7 @@ class TaskController extends Controller
      *
      * @return bool
      */
-    public function checkIfUserSolutionForTaskExists($user, $task)
+    public function checkIfUserSolutionForTaskExistsAction($user, $task)
     {
         $solutionRepository = $this->getDoctrine()->getRepository('ApplicationCoreBundle:Solution');
         $result = $solutionRepository->getSolutionByUserAndTask($task, $user);

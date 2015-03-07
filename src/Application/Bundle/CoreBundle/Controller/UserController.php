@@ -72,7 +72,7 @@ class UserController extends Controller
      * @ParamConverter("user", class="ApplicationUserBundle:User", options = {"mapping": {"username": "username"}})
      * @ParamConverter("solution", class="ApplicationCoreBundle:Solution")
      */
-    public function userSolutionFeedbackActions($user, $solution)
+    public function userSolutionFeedbackAction($user, $solution)
     {
         return $this->forward(
             'ApplicationCoreBundle:Solution:show',
