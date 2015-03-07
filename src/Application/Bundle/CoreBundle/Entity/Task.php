@@ -171,15 +171,11 @@ class Task
     /**
      * Get full title
      *
-     * @return string Title
+     * @return string Full title
      */
     public function getFullTitle()
     {
-        return sprintf(
-            '#%s: %s',
-            $this->id,
-            $this->title
-        );
+        return sprintf('#%s: %s', $this->id, $this->title);
     }
 
     /**
