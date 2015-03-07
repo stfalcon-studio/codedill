@@ -1,5 +1,7 @@
 # Codedill
 
+Web service for creating study tasks for developers and evaluating solutions anonymously.
+
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/stfalcon-studio/codedill?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## Installation DEV environment
