@@ -36,8 +36,8 @@ class TaskController extends Controller
      *
      * @return Response
      *
-     * @Route("/", name="tasks_list")
      * @Method({"GET"})
+     * @Route("/", name="tasks_list")
      */
     public function listAction()
     {
@@ -57,16 +57,12 @@ class TaskController extends Controller
      * @param Task    $task    Task
      * @param Request $request Request
      *
-     * @Route("/{id}/add-solution", name="add_solution")
-     *
-     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
-     *
-     * @Method({"GET", "POST"})
-     *
-     * @Security("has_role('ROLE_USER')")
-     *
      * @return Response
      *
+     * @Method({"GET", "POST"})
+     * @Route("/{id}/add-solution", name="add_solution")
+     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
+     * @Security("has_role('ROLE_USER')")
      */
     public function addSolutionAction(Task $task, Request $request)
     {
@@ -123,11 +119,9 @@ class TaskController extends Controller
      *
      * @return Response
      *
-     * @Route("/{id}", name="show_task")
-     *
-     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
-     *
      * @Method({"GET"})
+     * @Route("/{id}", name="show_task")
+     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
      */
     public function showAction(Task $task)
     {
@@ -175,12 +169,9 @@ class TaskController extends Controller
      *
      * @throws AccessDeniedException
      *
-     * @Route("/{id}/solutions", name="task_solutions_list")
-     *
-     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
-     *
      * @Method({"GET"})
-     *
+     * @Route("/{id}/solutions", name="task_solutions_list")
+     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
      * @Security("has_role('ROLE_USER')")
      */
     public function listSolutionsAction(Task $task, Request $request)
@@ -215,16 +206,12 @@ class TaskController extends Controller
      *
      * @param Task $task Task
      *
-     * @Route("/{id}/rating", name="list_solutions_ratings")
-     *
-     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
+     * @return Response
      *
      * @Method({"GET"})
-     *
+     * @Route("/{id}/rating", name="list_solutions_ratings")
+     * @ParamConverter("task", class="ApplicationCoreBundle:Task")
      * @Security("has_role('ROLE_USER')")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
      */
     public function listSolutionsRatingAction(Task $task)
     {
@@ -247,6 +234,8 @@ class TaskController extends Controller
      * @param Task $task
      *
      * @return bool
+     *
+     * @Method({"GET"})
      */
     public function checkIfUserSolutionForTaskExistsAction($user, $task)
     {

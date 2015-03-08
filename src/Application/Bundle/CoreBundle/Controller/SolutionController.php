@@ -37,6 +37,7 @@ class SolutionController extends Controller
      *
      * @return Response
      *
+     * @Method("GET")
      * @Route("/{id}/show", name="solution_show")
      * @ParamConverter("solution", class="ApplicationCoreBundle:Solution")
      */
@@ -68,8 +69,8 @@ class SolutionController extends Controller
      *
      * @return Response
      *
-     * @Route("/{id}/save-rating", name="solution_rating_save")
      * @Method("POST")
+     * @Route("/{id}/save-rating", name="solution_rating_save")
      * @ParamConverter("solution", class="ApplicationCoreBundle:Solution")
      */
     public function saveRatingAction(Solution $solution, Request $request)
@@ -123,17 +124,18 @@ class SolutionController extends Controller
      *
      * @return Response
      *
+     * @Method("GET")
      * @Route("/{username}/solutions", name="user_solutions_list")
      * @ParamConverter("user", class="ApplicationUserBundle:User")
      */
     public function userSolutionsAction(User $user, Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $solutionRepository = $em->getRepository('ApplicationCoreBundle:Solution');
+        $solutionRepository = $this->getDoctrine()->getRepository('ApplicationCoreBundle:Solution');
+
         $solutions = $solutionRepository->findBy(['user' => $user]);
 
         return $this->render(
-            'ApplicationUserBundle:User:solutions.html.twig',
+            'ApplicationCoreBundle:User:solutions.html.twig',
             [
                 'user'      => $user,
                 'solutions' => $solutions

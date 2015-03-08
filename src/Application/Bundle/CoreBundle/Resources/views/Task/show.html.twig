@@ -2,16 +2,20 @@
 
 {% block javascripts %}
     {{ parent() }}
+
     {% javascripts
-    '@ApplicationCoreBundle/Resources/public/js/rating.js' %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
+        '@ApplicationCoreBundle/Resources/public/js/rating.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
 
 {% block content %}
     ← <a href="{{ path('tasks_list') }}">all tasks</a>
     <h1>{{ task.fullTitle }}</h1>
-    <div class="well">{{ task.description|raw }}</div>
+    {% autoescape 'html' %}
+        <div class="well">{{ task.description|raw }}</div>
+    {% endautoescape %}
 
     {% if (is_user_solution) %}
         {% if solution is not null %}
@@ -24,5 +28,4 @@
     {% if (is_user_solution) %}
         <a class="btn btn-info" href="{{ path('task_solutions_list', {'id': task.id}) }}">Review solutions</a>
     {% endif %}
-
 {% endblock %}

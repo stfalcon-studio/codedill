@@ -6,7 +6,9 @@
             <div class="bs-callout bs-callout-info">
                 <h1 class="page-header" id="task-{{ task.id }}"><a href="{{ path('show_task', {'id' : task.id}) }}">{{ task.fullTitle }}</a></h1>
 
-                <p>{{ task.description|truncate(300, true)|raw }}</p>
+                {% autoescape 'html' %}
+                    <p>{{ task.description|truncate(300, true)|raw }}</p>
+                {% endautoescape %}
             </div>
         {% else %}
             <div role="alert" class="alert alert-info">

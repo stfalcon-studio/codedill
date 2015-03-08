@@ -11,6 +11,7 @@
 namespace Application\Bundle\CoreBundle\Controller;
 
 use Application\Bundle\UserBundle\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -31,6 +32,7 @@ class UserController extends Controller
      *
      * @return Response
      *
+     * @Method({"GET"})
      * @Route("/{username}/solutions", name="user_solutions_list")
      * @ParamConverter("user", class="ApplicationUserBundle:User")
      */
@@ -75,6 +77,7 @@ class UserController extends Controller
      *
      * @return Response
      *
+     * @Method({"GET"})
      * @Route("/{username}/solutions/{id}/feedback", name="user_solution_feedback")
      * @ParamConverter("user", class="ApplicationUserBundle:User", options = {"mapping": {"username": "username"}})
      * @ParamConverter("solution", class="ApplicationCoreBundle:Solution")
@@ -83,10 +86,10 @@ class UserController extends Controller
     {
         return $this->forward(
             'ApplicationCoreBundle:Solution:show',
-            array(
+            [
                 'solution' => $solution,
                 'request'  => $this->getRequest(),
-            )
+            ]
         );
     }
 }
