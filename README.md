@@ -1,6 +1,6 @@
 # Codedill
 
-Web service for creating study tasks for developers and evaluating solutions anonymously.
+> Web service for creating study tasks for developers and evaluating solutions anonymously.
 
 *Currently in development. Things may change or break until a solid release has been announced.*
 
@@ -44,10 +44,10 @@ $ npm install -g bower
 #### Create project via Composer
 
 ```bash
-$ composer create-project -s=dev stfalcon-studio/codedill codedill
+$ composer.phar create-project -s dev stfalcon-studio/codedill codedill
 ```
 
-`-s=dev` means non-stable version, until we make first stable release.
+`-s dev` means non-stable version, until we make first stable release.
 
 #### Check your system configuration
 
@@ -58,7 +58,7 @@ To do this, execute the following:
 $ php app/check.php
 ```
 
-If you get any warnings or recommendations, fix these now before moving on.
+If you got any warnings or recommendations, fix them before moving on.
 
 ##### Requirements
 
@@ -70,15 +70,17 @@ If you get any warnings or recommendations, fix these now before moving on.
 * Intl needs to be installed with ICU 4+
 * APC 3.0.17+ (or another opcode cache needs to be installed)
 
-#### Change the permissions of the `app/cache/` and `app/logs` directories so that the web server can write into it.
+#### Setting up permissions for directories `app/cache/` and `app/logs`
 
 ```bash
-$ chmod 0777 app/cache/ app/logs
+$ HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+$ sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
+$ sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
 ````
 
 #### Change DBAL settings, create DB, update it and load fixtures
 
-Change DBAL setting in `app/config/config.yml`, `app/config/config_dev.yml` or
+Change DBAL setting if your need in `app/config/config.yml`, `app/config/config_dev.yml` or
 `app/config/config_test.yml`. After that execute the following:
 
 ```bash
@@ -87,7 +89,7 @@ $ ./console doctrine:migrations:migrate
 $ ./console doctrine:fixtures:load
 ```
 
-You can set environment `test` for command if you add `--env=test` to it.
+You can set `test` environment for command if you add `--env=test` to it.
 
 #### Create new application on GitHub
  
@@ -103,4 +105,6 @@ Press the button "Register application".
 
 Use the newly generated `Client ID` and `Client Secret` parameters for your application.  
 
-###### That's all. Enjoy Codedill and send feedback =)
+---
+
+That's all. Enjoy "Codedill" and send feedback ^_^
