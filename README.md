@@ -1,8 +1,8 @@
 # Codedill
 
-> Web service for creating study tasks for developers and evaluating solutions anonymously.
+Web service for creating study tasks for developers and evaluating solutions anonymously.
 
-*Currently in development. Things may change or break until a solid release has been announced.*
+> *Currently in development. Things may change or break until a solid release has been announced.*
 
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/stfalcon-studio/codedill.svg?style=flat-square)](https://scrutinizer-ci.com/g/stfalcon-studio/codedill/)
 [![Build Status](https://img.shields.io/travis/stfalcon-studio/codedill.svg?style=flat-square)](https://travis-ci.org/stfalcon-studio/codedill)
