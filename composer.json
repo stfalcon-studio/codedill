@@ -7,8 +7,8 @@
     "authors": [
         {
             "name": "Valeriy Rabievsky",
-            "email": "facktoreal@gmail.com",
-            "role": "Developer"
+            "email": "dev@ftrrtf.com",
+            "role": "Developer, Author"
         },
         {
             "name": "Artem Genvald",
@@ -52,7 +52,7 @@
         }
     ],
     "support": {
-        "email": "facktoreal@gmail.com",
+        "email": "codedill@ftrrtf.com",
         "issues": "https://github.com/stfalcon-studio/lost-and-found/issues"
     },
     "require": {
